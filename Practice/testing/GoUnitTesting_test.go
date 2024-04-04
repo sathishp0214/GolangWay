@@ -102,6 +102,12 @@ Unit testing GoRoutine without channel inside - We can test like normal function
 Unit testing in channels - Channels working between goRoutines, So unit testing we does on single function, My opinion channels is fit for unit testing. So we can do integration testing.
 */
 
+/*
+Errorf() vs Fail()
+Fail() - Just fails the case, Cannot display the failure message, But Errorf() Supports display the failure message
+
+*/
+
 func TestSimple(t *testing.T) {
 	input := 10
 	output := 20
@@ -111,8 +117,6 @@ func TestSimple(t *testing.T) {
 
 		t.Logf("Log message %v", 1) //prints this message in terminal
 
-		// t.Fatal("Test failed due to the reason") //Failing the test with message in terminal
-
 		t.Errorf("error message %v", 1) //This also Failing the test with message in terminal
 
 		t.Skipf("skipping all the code below %v", 1)
@@ -120,14 +124,34 @@ func TestSimple(t *testing.T) {
 	}
 }
 
+func TestFatal(t *testing.T) {
+	var a error
+	if a == nil {
+		// t.Fatalf("fatal message check")
+		t.Errorf("Error message check")
+	}
+
+	//Fatalf vs Errorf - Fatalf will stop the code execution at that line itsef, Even code hits Errorf, Still code execution not stops. Anyways Both fails the test case.
+	//should use fatalf for pre-validation before getting into expensive/long code operations
+
+	t.Logf("Checks whether this line prints")
+}
+
 func TestCallAnotherTestFunction(t *testing.T) {
 	TestSimple(t) //We are calling another test function inside another test function
 }
 
-func TestCallAnotherTestFunctionMethod1(t *testing.T) {
-	t.Run("Sample test function calling", TestSimple) //Calling another test function "TestSimple" in another function and gets the return with Success or fail case from that test function "TestSimple".
+func TestFunctionWithSubTest(t *testing.T) {
+	/*
+		t.Run() - We can run the subtest using t.Run
 
-	t.Run("Another example", func(t *testing.T) {
+		//can run particular subtest alone
+		go test -run=TestFunctionWithSubTest/Subtest_function_name_1 -v
+	*/
+
+	t.Run("Subtest_function_name_1", TestSimple) //Calling another test function "TestSimple" in another function and gets the return with Success or fail case from that test function "TestSimple".
+
+	t.Run("Subtest_function_name_2", func(t *testing.T) {
 		a := 10
 		if a < 10 {
 			t.Errorf("failed case in value")
@@ -179,7 +203,7 @@ type TableDrivenTestGetNumbers struct {
 }
 
 // table driven test (or) Data driven test -- Passing multiple input test cases into test function using struct.
-// table driven test type reduces the code duplicate.
+// table driven test type reduces the code duplicate. Instead of writing muliple test function for multiple test inputs, We can use single table driven test function with passing multiple test inputs.
 func TestTableDrivenGetNumbers(t *testing.T) {
 	inputs := []TableDrivenTestGetNumbers{{0, false}, {2, true}, {3, false}}
 
