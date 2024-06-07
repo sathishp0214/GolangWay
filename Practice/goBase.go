@@ -13,16 +13,42 @@ import (
 )
 
 /*
+
+
+interpreted vs compiled programming language execution process and performance:
+
+Compiled - Compiling whole Code converted/compiled directly into machine binary code(0’s and 1’s) once that the OS processor can understand and execute. So compiled language removes the interpreter middle man and there is no need to transalate code into OS processor for undertanding, So it increases the performance. EX: two native persons speaks directly in there native language, So communication went efficiently.
+
+Interpreted languages are also called scripting languages, because they use an interpreter to translate code line by line at runtime. (Like movie scripts happens scene by scene)
+Interpreted - In run time interpreting, virtual machine changes the actual code line by line into Some other format (ex: opcode(or) 0’s and 1’s  in python ), then the OS processor understands and executes code.
+(For each line, again and again It executes and converts that line code into binary code 0’s and 1’s, So it executes slower than compiled languages)
+Even in a for loop with 100 iterations, the interpreted freshly translates the code for each iteration again and again.
+
+python's .pyc is bytecode(Which is more compact and optimized representation of the Python code) that's not equalent to the compiled language's compiled binary file.
+
+https://stackoverflow.com/questions/38491212/difference-between-compiled-and-interpreted-languages
+
+Hash Table data structure:
+A Hash table is defined as a data structure used to insert, look up/read, and remove key-value pairs quickly.
+
+Both python's dictonary and Golang's Map both uses the hash table data structure internally.
+
+Hash table uses O(1) for both data inserting and searching/reading. Array uses O(log n) for data searching/reading, So hash table is more faster.
+
+
+Golang supports Self-Contained Binaries - Once we have the golang compiled binary file, We don't need any dependenies source code files/libraries like go.mod/go.sum etc. Just we should have golang installed, Then we can execute the golang compiled binary file directly on any machines.
+
+
 Python vs Golang:
 
 Golang doesn't support exceptions,inheritance,oop constructor like python.
 Golang anonymous is more powerful than python anonymous functions. python anonymous functions supports only single line statements and return it.
-Python doesn't supports pointers, defer statements. Python supports exception "finally" and "with" statement instead of "defer".
-Python has better package support and community support than golang.
+Python doesn't supports pointers, defer statements. Python supports exception's "finally" and "with" statement instead of "defer".
+Python has more number of package support and community support than golang.
 Golang code is more faster than python EX: compare normal same "hello world" program to same algorithm programs.
 Golang has inbuilt and more efficent concurrency like GoRoutine with channels support. Python multithreading is not light weight and not effcient as Golang and have to use "multithreading" package.
 Python thread is preferred for I/O bound tasks only, Where python multiprocessing is preferred for CPU-bound tasks, Where GoROutine is fine for both I/O bound and CPU bound tasks, So Routines don't need multiprocessing seperately.
-Golang is preferred in development of high performance required application, microservices, cloud computing, system programming like direct OS hardware applications like drivers.
+Golang is preferred in development of high performance required real time application, microservices, cloud computing, system programming like direct OS hardware applications like drivers.
 Python is definitely preferred in Data analytics/Data scientist/Machine learning areas and Web application development beacuse of more mature with more inbuilt features frameworks like django and flask.
 
 
@@ -32,6 +58,381 @@ Supports first class functions.
 Powerful anonymous function support.
 Defer
 Panic and recover.
+
+
+Golang doesn't support exceptions reasons by Golang creators - golang wants to handle each error instead of multiple errors with single exception scope. And due to the design contrainst of implementing exceptions in golang.
+
+go doesn't support ternary '?:' operator
+*/
+
+/*
+
+/*
+--------Go environment:
+
+Package - (directory/folder of go files).
+Module -- If a package has a go.mod file, Then it is considered as module. In cases multiple packages can also have a common go.mod file.
+
+
+//create go.mod file under directory
+go mod init directory_name/folder_name
+
+go.mod keeps the list of import packages(our own go packages and third party go packages) in the particular package(s).
+go.mod - For installing/updating/uninstalling packages will be automatically updated in go.mod. (Like python pip requirements.txt)
+
+package main (main package) - In each go file -- is considered as parent directory_name/folder_name.
+package "child_folder_name"(sub-package)  -- child_folder_name located inside parent directory_name/folder_name.
+
+Running a go file -- go run file.go:
+package main  --- Package should be the "main"
+
+func main() {   --- Function should be the "main"
+
+}
+
+both package and function should be "main" for executing. It is considered an entrypoint and this main() is called first, from here we can call other functions.
+
+init()
+All declared init(), Called only once before main(), When we running particular package. We can use for load initial values and having client connections etc.
+
+
+//Download other 3rd party package/repo EX: pip install
+go get Outside_package_name
+go get -u github.com/spf13/cobra   //latest version installed
+go get github.com/spf13/cobra@v1.5.1 //particular package version
+go get github.com/spf13/cobra@4rf356 //package particular git commit
+
+go mod download  – this download all listed packages in go.mod file and stores in GOPATH/pkg/mod
+
+Once you installed package, automatically below require() section included in go.mod file
+
+require (
+	github.com/inconshreveable/mousetrap v1.0.0 // indirect
+	github.com/spf13/cobra v1.2.1
+	github.com/spf13/pflag v1.0.5 // indirect
+)
+
+// indirect  --- These "indirect" -- this mousetrap package we are not downloaded. This package is used by our other installed package "cobra". So we use this package indirectly.
+
+
+go mod tidy: (syncs the package information in go.mod and go.sum file automatically and download and installs packages using "go get" automatically)
+If we added/remove an import package in a go file. Then run "go mod tidy", it will add/remove package informations in go.mod and go.sum
+
+go.sum:
+
+go.mod and go.sum file works together. "go mod tidy" -- syncs the both go.mod and go.sum files.Mostly we are works directly with go.sum file
+
+For a single package from go.mod -- In go.sum, keeping that package's single or multiple versions hash checksum.
+
+Example:
+github.com/eapache/go-resiliency v1.1.0/go.mod h1:kFI+JgMyC7bLPUVY133qvEBtVayf5mFgVsvEsIPBvNs=
+github.com/eapache/go-resiliency v1.3.0 h1:RRL0nge+cWGlxXbUzJ7yMcq6w2XBEr19dCN6HECGaT0=
+github.com/eapache/go-resiliency v1.3.0/go.mod h1:5yPzW0MIvSe0JDsv0v+DvcjEv2FyD6iZYSs1ZI+iQho=
+
+
+GOROOT  -- Path for Go language's OS installation and its inbuilts files/packages. In linux $GOROOT mostly -- /usr/local/go
+
+GOPATH -- Its for Go project path, Where we have project's source code, project's 3rd party packages source code, cache etc.
+Default GOPATH linux -- \home\go (or) \home\user_account\go
+
+GOPATH's folders:
+
+GOPATH/src -- contains project source/repo code
+
+GOPATH/pkg/mod -- In mod directory, stores the project's go.mod packages.
+
+go clean - Used to remove already builded binary file and internal temporary files that can be deleted
+
+go clean -modcache   – this used to remove all go.mod packages in GOPATH/pkg/mod
+
+go get vs go get -u vs go get -d:
+
+go get -- download and install go package
+
+go get -d -- only download the package
+
+go get -u -- download and install the update of that go package
+
+Removing a go package:
+go mod tidy  //if you remove a package in all imports in go files, while running this command, deletes that package automatically.
+
+go get package@none
+
+go get vs go run vs go build vs go install:
+
+go get -- download and install package and maintain dependency with go.mod file. Stores packages in GOPATH/pkg
+
+go run -- single step of compiling and executing go file. It will not store any binary file. (its for local development env purpose)
+
+go build -- creates executable compiled binary file in the same directory. If any change in code, again I have to do the go build. Overall avoids repeated compiling time and can run this compiled file in different OS also. (its for production environment purpose)
+To Run a go builded file in terminal -- ./compiled_file
+
+go install --(go build + go install) this also create "go build's" executable binary file for our own packages/3rd party packages and stores in this path $GOPATH/bin.
+Go install doesn't change anything in go.mod dependencies.
+
+Go build/install useful for production environments
+
+-----Golang package helper:
+
+go doc strings   //This terminal command list all functions in strings function with function arguments and return types
+
+go doc strings contains  //Gives the brief instruction for “contains” function in strings package
+
+
+
+Gets a function’s arguments and return type informations
+// t := reflect.TypeOf(appendToSliceMoreEfficentMethod)
+// t := reflect.TypeOf(defaultMemoryBytesSizeDataTypes) //func()
+t := reflect.TypeOf(strings.Contains) //func(string, string) bool
+fmt.Println(t)
+
+Go inbuilt core tools:
+
+Go vet:
+
+go vet package/singleFile.go  //Gives warnings in code, Still code will be compiled and executed.
+Ex: Unreachable code - Code after the return statements, break statements
+
+go vet main.go
+
+game_version := 3
+EX: fmt.Printf("Super Mario %s\n",game_version)
+./main.go:6:2: Printf format %s has arg 3 of wrong type int    //go vet response wrong data type value passed in printf
+
+Goimports  - Code formatting, Auto package import/unimport on file
+
+golint - Gives opinion about the code conventions like variable naming, comments added on top of function definitions etc
+
+
+Go terminal help commands:
+go help   //list go help commands
+
+go help run  //detailed info of each command
+go help build
+go help doc
+
+go doc -help   // -help will give detail info of other set of commands
+goimports -help  //Manually do go imports on pacakge/file
+
+
+-----go vendor:
+
+can have vendor folder in same application’s repository directory
+go mod vendor - This create/update the latest go.mod packages in the vendor folder.
+
+Vendor folder has all required current go.mod packages.
+Vendor folder contains go.mod packages backup which is copying from the GOPATH/go/mod/.
+To have to manually update the go vendor everytime we add or update or delete the packages in go.mod.
+
+Uses:
+
+Maintain particular package versions for stable build or to avoid conflict issues with other packages or environment.
+supports offline build during the CI pipeline stages.
+Reproducable builds because we maintains the same package and its versions through go vendor.
+Cases we can reduce the docker image size by reusing the vendor folder of packages
+
+Hownever still go.mod way of automatically managing packages withoug go vendor is advisable in the production environment.
+/*
+
+----Need/uses of pointers:
+In golang, Pointer has the same fixed memory size of 8 bytes for even bigger data types like structs with multiple fields.
+The size of a pointer variable is 8-bytes for 64-bit machines and 4-bytes for 32-bit machines.
+
+Can do "Pass as reference" in function - So modifications happening inside the function reflects outside also. (If we do "Pass as Value" in function, Will create a new memory/copy for that variable and then process.)
+So overall its memory efficient.
+
+Empty pointer has nil value, So we can use pointers for validating by nil value.
+
+using pointers for large structs.
+
+----Golang doesn't support function overloading, method overloading.
+
+-----Abstraction:
+
+-- means not a physical one, just a representation of a physical one EX: All thoughts we are getting are abstraction of real/physical things.
+
+Abstraction in golang can be achieved by interface with abstract method declarations.
+
+As above mentioned the abstraction name meaning --
+type Sample interface {
+	function()
+} -- This is just represention of real/physical function(), the implementation of function() will be in other structs methods.
+
+---------
+Variable declaration  – Creating a variable — Var i int
+Variable Assigning   – Assigns value to variable —  i:=10, var t = 20
+Variable initializers   – i:=10   – Gets variable type from the variable value.
+
+
+-------golang formatting in fmt.printf():
+
+fmt.Printf("%s %s %T %v %p", "saa", "34", "dfg", 134, &struct)
+
+%s - string value
+%d - int value
+%v - prints any data type value -- This is more useful
+%+v - prints structs with key:value format (useful in pointer structs also), remaining all same with "%v"
+%T - prints data type -- int, string etc
+%p - prints memory address, while passing value like this -- &slice, &struct etc
+
+
+ ---dot (.) import:
+ import . "fmt"     // We can directly use packages function without "fmt." -- Println("hello")
+
+ -------“Blank identifier” underscore “_” also known as “Blank identifier”
+Used for unused variables mostly in for range loops and err return value from function
+Used for unused import in a go file
+
+-----Debugging in GO
+
+GDB debugging in go:
+
+//build all files in a package folder
+go build -gcflags "-N -l" -o .
+run in terminal "gdb compiled_file"
+
+Then we can set breakpoints, run the program and prints variables/pointers and go routines.
+
+delve (dlv) debugging in go: (This debugger only we uses in VSCode debugging for golang)
+
+https://golang.cafe/blog/golang-debugging-with-delve.html
+https://vtimothy.com/posts/debugging-goroutines/
+
+dlv debug main.go   //This way we using this debugger with terminal
+
+Then in the terminal, we can set breakpoints, prints variables/go routines and change variable values.
+Delve is better and has more features than gdb debugging.
+
+
+
+-----Golang Naming conventions and rules:
+Local variable names can be start with lowercase - user, userName
+
+Global and constant variables, function name, struct name and its fields and its methods depend upon exported (or) unexported, Can start with lowercase or uppercase.
+
+func printEmployeeDetails(employeeID int, employeeName string) {}  - Function arguments can be start with lowercase
+
+Error variables can be started as ErrValue, ErrMessage
+
+Bool variables can be started as IsTrue, IsContains
+
+Avoid repetitive Words like
+widget.NewWidget -> widget.New
+widget.NewWidgetWithName -> widget.NewWithName
+db.LoadFromDatabase -> db.Load
+
+All the go directory/package names and .go file names should be starting with a small letter.  (this will not affect the Exported/Unexported)
+EX: github.com/go-chi/chi  // Here both package and filename are started in small letters.
+99% of golang packages/filenames follow this only
+
+Test file name format – filename_test.go
+
+--------Normal variable vs short variable declaration usage:
+Normal variable declaration - If don’t know the initial value of the variable
+EX: Use “var a int” instead of  “a := 0”
+Short Variable declaration - If know the initial value of the variable. EX: Height := 10
+
+----Function types in go: (Don’t know any use case as of now)
+Different functions have the same number of arguments and argument types and same number of return values and types.
+
+-------Incomparable data types in GO: - Slice,Map
+We can’t compare slices,maps. EX: slice1 == slice2
+We can’t use these types as map keys.
+
+
+-------Memory allocation in golang:
+
+Stack memory(LIFO) in GO and broad terms – Used to store all function calls and complete the function calls in LIFO order and functions' memory like arguments,returns and local variables. Once a particular function call is completed, The same is removed in stack memory.
+
+EX: func main() {
+	log()
+}
+
+func log() {
+	another_function()
+}
+
+In this above code stack LIFO order, First completing function is another_function() and then log() function completes,
+
+Default maximum stack size in Linux os is 8MB. But in golang every function call including goRoutines takes a few kbs size in stack memory.
+
+If the stack size memory exceeds, Generally “Stackoverflow” errors return.
+
+
+
+
+------Heap memory in GO and broad terms: Used for handling dynamic memory and global variables/long term memory having scope beyond stack memory’s function call.
+
+Heap memory using often data types - go Slice, Maps and Slice/map inside struct uses heap memory, new(), make() function variables uses heap memory in golang etc
+Still Go Runtime will decide accordingly and store other data in heap as well.
+
+Both stack and heap memory are controlled by the GO Runtime in golang.
+
+---------Golang Garbage Collection:
+
+Go's inbuilt garbage collector (GC) uses the Tricolor Mark and Sweep algorithm
+
+golang inbuilt Garbage collection is used in heap memory to free the unneeded memory(even python also has inbuilt garbage collection).
+
+Stack memory is generally faster than heap memory.
+
+Manually force/trigger the inbuilt garbage collection in a program:
+runtime.GC()   //runtime package has this code
+We can manually trigger, Once you are clear/delete the large data types like above mentioned “Heap memory using often data types”.
+
+------When Garbage collection triggers automatically:
+Golang auto garbage collection does memory cleaning periodically like every 2 minutes or Once heap memory reaches the auto predefined threshold limit, Assume if a particular heap memory variable is used and not required anymore inside a function. Then auto garbage collection cleans those heap memory variables.
+
+We can turn off auto garbage collection entriely ans also can put custom threshold values in environment variables EX: GOGC=off, GOGC=80, Defaulty GOGC=100
+
+
+Memory Leak Generally - Code assigns the memory but not releases back the memory, So the memory keep on increasing and affects the performance and can crash the application. Even garbage collector can't releases it, because more chances the memory still referenced for use.
+
+Memory Leak scenarios:
+Global variable slice,Map - Keep on adding the values, But not removes it. (Add the expiration logic and periodically check it for deletion)
+GoRoutines leak - check this function GoRoutineLeakExample()
+Functions thats keep on running infinitely - Should take care more for memory leak possibility.
+
+
+Profiling in GO and broad term:
+Used to analyze the performance/efficiency to find out memory leaks/bottlenecks(particular code takes more time/memory) of a Go program/function execution.
+
+CPU profiling - CPU usage and time to execute a program/function
+Memory profiling - Memory usage to execute a program/function
+Concurrency profiling - performance while multiple goRoutines are used.
+
+Inbuilt go pprof packages - runtime/pprof , net/http/pprof and other packages available
+
+Go inbuilt profiling for “testing” package testing functions:
+go test -cpuprofile cpu.prof -memprofile mem.prof -bench .
+
+https://hackernoon.com/go-the-complete-guide-to-profiling-your-code-h51r3waz
+
+------Unsafe pointer:
+Generally pointer are more restricted and safer standards in golang like
+i)can’t do mathematical/conditional/logical operations directly on pointers like &a + 2, &a>2 etc
+ii)Can’t convert one pointer data type into another datatype
+
+Using unsafe package, We can do operations without the above restriction and adds more flexibility on golang pointer on unsafe manner. Overall it's risky and not recommended.
+
+
+
+------GOPRIVATE environmental variable - We can set our project module in GOPRIVATE, Then that module considers a private module not available for public users to download it.
+
+
+----CGO in golang: CGO helps to cross-compilation - Helps to use C code in golang and golang code in C. The CGO_enabled option enables the CGO in our go environment, Defaultly its disabled CGO_enabled=0.
+
+chi vs mux vs gin golang framework:
+chi and mux are almost similar, Mux is not maintained and almost deprecated. Both chi and mux are good for routing activities for api's CRUD operations.
+Gin has more features and is more popular than chi and Gin claimed themselves faster than Chi/mux frameworks.
+
+Struct field tags:
+name string `json:”name_of_user”`  //Example struct field name
+
+From struct’s variable names, Used to set key(or)field names for json, xml,yaml, sql column fields,bson(mongodb document key name) data
+
+Even we can use to validate more conditions EX: field is empty or not, valid email etc
+
 */
 
 var p = fmt.Println //using "fmt.Println" as global variable "p" for convenience usage of print statements as p()
@@ -140,7 +541,9 @@ func main() {
 
 	// InbuiltGolangFunctionsLatest()
 
-	varDeclaration()
+	// InbuiltGolangFunctionsLatest()
+
+	GenericsInStructExample()
 
 }
 
@@ -234,17 +637,38 @@ func mutable_Immutable_DataTypes() {
 
 }
 
+func PointerAndDoublePointers() {
+
+	value := 10
+	var singlePointer *int
+	fmt.Println(singlePointer == nil) //This is true, Because we not assigned any other variable's memory address.In golang,Every pointer defaulty has its own memory address we can get that address by "&singlePointer" like all variables.
+	singlePointer = &value
+	fmt.Println("address of value variable", &value)
+	fmt.Println("address of SinglePointer variable", &singlePointer)
+	fmt.Println("value of SinglePointer variable", singlePointer) //This address of Value variable and SinglePointer value is same
+
+	//doulePointer(this is rare) - Holds the address of the another pointer. That another pointer holds the address of the another variable.
+	//doulePointer use case - If we have to update the pointer's memory address in function and works pointer as call by value. Refer this https://stackoverflow.com/questions/8768344/what-are-pointers-to-pointers-good-for
+	var doublePointer **int
+	doublePointer = &singlePointer
+
+	fmt.Println("address of DoublePointer variable", &doublePointer)
+	fmt.Println("value of DoublePointer variable", doublePointer) //similarly address of singlePointer and value of doublePointer is same.
+	fmt.Println("deference value from doublePointer", **doublePointer)
+}
+
 func InbuiltGolangFunctionsLatest() {
 
 	// make()  //USed to create slice, map, channel data types
 
-	//new() - Used to create new pointer for all data types
+	//new() - Used to create not-nil pointer for all data types
 	Intpointer := new(int)
 	SlicePointer := new([]int)
 	structPointer := new(SampleStruct)
+	// Intpointer1 := new(*int)  // If we try to pass pointer EX:*int in new(), It will create double pointer EX:**int
 
-	p("new() pointers", Intpointer, SlicePointer, structPointer)
-	p("new() creates non-nil pointers", Intpointer == nil) //false, new() creates non-nil pointers
+	p("new() created pointers", Intpointer, SlicePointer, structPointer)
+	p("new() creates non-nil pointers", SlicePointer == nil) //false, new() creates non-nil pointers
 
 	f := []int{1, 2, 3}
 	g := map[int]int{1: 11, 2: 22}
@@ -318,7 +742,7 @@ func sliceShallowDeepCopyDefault() {
 	third = append(third, 200)
 	emptySlice = append(emptySlice, 300)
 
-	//Below modifications will reflect deep copy the values in any other slices, Because all other slices had append modifications on above
+	//Below modifications will reflect deep copy the values in any other slices, Because all other slices had append modifications on above, due to re-slicing memory address is updated.
 
 	baseSlice[1] = 1000
 	Second[0] = 33
@@ -547,16 +971,31 @@ func ByteAndRune() {
 
 func varDeclaration() {
 
-	//declaring variables with "var" keyword with below data type returns nil, So needs to intialize and use it for avoiding nil pointer errors.
-	var a int
-	var b string
-	var c bool
+	//Below data types returns not nil
+	// var a int  //default value 0
+	// var b string //default value empty string
+	// var c bool //default value false
+	// var d1 SampleStruct //struct field's default values {0}
+
+	//Below same data types as pointers returns nil
+	var a *int    //default value 0
+	var b *string //default value empty string
+	var c *bool   //default value false
+	var d *SampleStruct
+
+	if a == nil && b == nil && c == nil && d == nil {
+		fmt.Println("check nil with pointer", a, b, c, d)
+	}
+
+	//declaring variables with "var" keyword with below data type returns nil, So needs to intialize and theh should use it for avoiding nil pointer errors.
+
 	var e map[int]int
 	var e1 []int
 	var p interface{}
 	var p1 chan int
-	if e == nil && e1 == nil && p == nil && p1 == nil {
-		fmt.Println("declare variables with var keywords returns nil--", e, e1, p, p1, a, b, c)
+
+	if e == nil && e1 == nil && p == nil && p1 == nil { //condition passes true
+		fmt.Println("declare variables with var keywords returns nil--", e, e1, p, p1)
 	}
 
 	//now intialized the values, Now it will not return nil
@@ -569,7 +1008,7 @@ func varDeclaration() {
 }
 
 func typeCasting() {
-	//Type_Casting - Converts the variable from one dat type to another data type.
+	//Type_Casting - Converts the variable from one data type to another data type.
 
 	var f float64 = 6.44
 	fmt.Println(int(f)) //converts float into integer
@@ -611,7 +1050,7 @@ func typeCasting() {
 
 func deferFunction() {
 	//defer not works in deadlock errors
-	//defer works in "panic" also. (if "defer statements" comes only before the "panic statement")
+	//defer works in "panic". (if "defer statements" comes only before the "panic statement")
 	// defer fmt.Println("PPPPPPPP")   //This prints
 	// panic("Stop")
 	// defer fmt.Println("HHHHH")   //this defer will not work
@@ -762,6 +1201,7 @@ type SampleStruct struct {
 }
 
 func anonymousInlineFunction() {
+	//This functions also called as function literals.
 	//inline function, Don't need to pass the local variables, they have the scope automatically
 	var data int
 	data = 3
@@ -784,11 +1224,39 @@ func anonymousInlineFunction() {
 		return 1000
 	} //Shouldn't use () here, It will be used with closure variable
 
+	//closureVariable - This variable currently holds the reference of the above lambda function. EX: p = fmt.Println
+
 	returnedValue := closureVariable() //calls the above anonymous function in one or multiple times
 	returnedValue = closureVariable()
 	returnedValue = closureVariable()
 	fmt.Println(returnedValue)
 
+	//another pattern from the function closures: Lambda function as return type
+	//https://www.calhoun.io/5-useful-ways-to-use-closures-in-go/
+	//https://code101.medium.com/understanding-closures-in-go-encapsulating-state-and-behaviour-558ac3617671
+
+	FunctionClosurePatternExample()
+
+}
+
+func FunctionClosurePatternExample() {
+	counter1 := createCounter() //these counter1, counter2 has the references of the returned inline function from the createrCounter()
+	counter2 := createCounter()
+
+	//both these counters maintains the seperate state. We can use like python's generator. Still have some issue in understanding this pattern completely
+	fmt.Println(counter1()) // Output: 1
+	fmt.Println(counter1()) // Output: 2
+	fmt.Println(counter2()) // Output: 1
+	fmt.Println(counter2()) // Output: 2
+}
+
+func createCounter() func() int {
+	count := 0
+	increment := func() int {
+		count++
+		return count
+	}
+	return increment
 }
 
 func SliceDatatype() {
@@ -818,6 +1286,9 @@ func SliceMakeFunction() {
 	//Current capacity is doubled, once the slice size is exceeded the capacity.
 	//Capacity can be equal or greater than size/length of slice
 
+	sl := make([]int, 20, 100)
+	fmt.Println(sl, len(sl)) //[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] 20
+
 	sliceCap2 := make([]int, 0) //This works same as normal slice declaration EX: sliceCap2 := []int{}
 	sliceCap2 = append(sliceCap2, 18, 19, 20)
 	p(sliceCap2, len(sliceCap2), cap(sliceCap2))
@@ -827,6 +1298,16 @@ func SliceMakeFunction() {
 	p(sliceCap, len(sliceCap), cap(sliceCap))
 	sliceCap = append(sliceCap, 1, 2, 3, 4, 5, 6) //Once the given length of slice is exceeded,The overall capacity will be doubled like Internally The given capacity of the new underlying array will be created.
 	p(sliceCap, len(sliceCap), cap(sliceCap))
+
+	//another example
+	f := make([]int, 2, 5)
+	fmt.Println(f)
+	f = append(f, 10)
+	f = append(f, 20)
+	f = append(f, 30)
+	fmt.Println(f, len(f), cap(f)) //[0 0 10 20 30] 5 5
+	f = append(f, 40)
+	fmt.Println(f, len(f), cap(f)) //0 0 10 20 30 40] 6 10
 
 	//normal empty slice declaration -- If capacity not mentioned, capacity is same as size.
 	slice := []int{}
@@ -868,6 +1349,12 @@ func SliceMakeFunction() {
 
 	gh1 = append(gh1, 1, 2)
 	p(len(gh1), cap(gh1)) //9,10  -- Here still capacity is 10, Because we appeneded just two more values
+
+	/*
+		Using the capacity in slice can give better performance - If we have the idea of the length of slice definetely or approximetely, You can use capacity accordingly.
+		EX: If you are dealing with slice with large expected length, You can set capacity at intialization itself high.
+		https://stackoverflow.com/questions/45423667/what-is-the-point-in-setting-a-slices-capacity
+	*/
 }
 
 func arrayDataTypeFunction() {
@@ -1223,4 +1710,49 @@ func ConvertStructIntoMapViceVersa() {
 	}
 	fmt.Println(structSlice)
 
+}
+
+// Generics stack struct
+type Stack[T any] struct {
+	values []T
+}
+
+// NewStack creates a new empty stack
+func NewStack[T any]() *Stack[T] {
+	return &Stack[T]{values: []T{}}
+}
+
+// Push adds an element to the top of the stack
+func (s *Stack[T]) Push(value T) {
+	s.values = append(s.values, value)
+}
+
+// Pop removes and returns the top element from the stack
+func (s *Stack[T]) Pop() (T, bool) {
+	if len(s.values) == 0 {
+		var zeroValue T
+		fmt.Println("zerValue here", zeroValue)
+		return zeroValue, false
+	}
+	value := s.values[len(s.values)-1]
+	s.values = s.values[:len(s.values)-1]
+	return value, true
+}
+
+func GenericsInStructExample() {
+	// Stack of integers
+
+	intStack := NewStack[int]()
+	intStack.Pop()
+	intStack.Push(10)
+	intStack.Push(20)
+	value, ok := intStack.Pop()
+	fmt.Println("Popped from int stack:", intStack, "------", value, ok) // Output: Popped from int stack: 20 true
+
+	// Stack of strings
+	stringStack := NewStack[string]()
+	stringStack.Push("Hello")
+	stringStack.Push("World")
+	value1, ok := stringStack.Pop()
+	fmt.Println("Popped from string stack:", stringStack, "------", value1, ok) // Output: Popped from string stack: World true
 }

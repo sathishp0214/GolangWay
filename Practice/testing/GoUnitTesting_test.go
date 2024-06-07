@@ -423,7 +423,7 @@ func TestSQLMockDB(t *testing.T) {
 // 	}
 // }
 
-type User struct {
+type User1 struct {
 	ID    int    `bson:"_id" json:"id"`
 	Name  string `bson:"username"`
 	Email string `bson:"email"`

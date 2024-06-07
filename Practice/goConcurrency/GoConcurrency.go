@@ -20,16 +20,53 @@ var (
 /*
 
 Python threading vs GoRoutine:
-GoRoutine has very light weight GoROutines compared to Python threads.
-Python thread is preferred for I/O bound tasks only, Where python multiprocessing is preferred for CPU-bound tasks, Where GoROutine is fine for both I/O bound and CPU bound tasks, So Routines don't need multiprocessing seperately.
+GoRoutine has very light weight threads compared to Python which is actual OS threads.
+
+python has GIL(global interpreter lock), So only one thread can access the python's bytecode once. golang doesn't have GIL, Golang can run multiple goRoutines at once.
+
+Python thread is preferred for I/O bound tasks only, Where python multiprocessing is preferred for CPU-bound tasks, Where GoROutine is fine for both I/O bound and CPU bound tasks.
+
+Python uses lock/unlock mostly for preventing racing conditions, Golang has mutex lock/unlock.
+
+Python can't make communication between threads, but In golang can make communicate between goRoutines through channels.
+
+
 
 
 Parallelism in general(multiple things are executing actually at same time) - Multiple core processors running at same time. Each core processor can run multiple threads.
 Concurrency in general(multiple things are managing at same time) - Multiple threads/Go Routines run in one single/multi core processor.
 
-Go runtime can create 100s or 1000s logical GoRoutines in one single system thread. My personal laptop 1215U has 8 system threads. We don't know, In too depth internal in GO Runtime of how multiple goroutines are running at same time? always running GoROutines? How switches back between goRoutines?,
+Golang acheives Concurrency or Parallelism? - It can both
 
-Go runtime can have access to run all threads in system, So that automtically have access to all cores Since each core has two threads. we can't say Go routine whether uses concurrency or both concurrency and parallism.
+concurrency use case - Mostly it acheives the multiple goRoutines in one system core.
+Parallesim use case - If goroutines are working for CPU-bound tasks and Go Runtime have access to multiple cores for usage EX:GOMAXPROCs and multiple system cores available now, Then Golang uses parallelism.
+
+I/O bound vs CPU-bound tasks:
+
+I/O bound tasks are generally done good by multithreading/concurrency, Because of wait times between the components/systems, So defaultly there is a wait time there for the response. So multithreading/concurrency works efficiently.
+In multiprocessing/Parallelism usage, The tasks should not have any wait time like I/O bound tasks, So for the efficient usage of multiprocess,It should executing the tasks parallely all the time. So cpu-bound tasks suits well.
+
+I/O bound tasks use cases - Download/read/upload/write data in web/file server/DB and user inputs.
+CPU/bound tasks use cases - Mathematical calculations, encrytion/decrytion, compression/decompression etc.
+
+----------------Go Scheduler goRoutines internal working:
+Go Runtime uses scheduler for managing concurrent operations.
+Scheduler uses Non-Preemptive Scheduling uses work stealing queue which holds all runnable goroutines, So one goroutine take control on CPU and does its work and other goRoutines waits then next goRoutines doing the same thing one after one. We can runtime.GoSched() for manually handling this as well.
+
+When a goroutine is waiting on a channel operation or a mutex lock, it's removed from its runnable queue and placed in a waiting state. The scheduler then focuses on other goroutines.
+
+Scheduler's Role:
+
+The scheduler constantly monitors the state of goroutines and the availability of CPU cores.
+It selects a runnable goroutine from a scheduling queue, considering factors like:
+Fairness: The scheduler attempts to give all goroutines a fair chance to run.
+I/O Wait: If a goroutine is waiting for I/O, the scheduler might choose another goroutine that can make immediate progress using CPU resources.
+
+Scheduler uses Context Switching:
+Once a goroutine is chosen for execution, the scheduler performs a context switch. This involves saving the state of the currently running goroutine (registers, stack) and loading the state of this goroutine. This allows the CPU to begin executing the next selected goroutine.
+
+
+
 
 single goRoutine take 8kb stack size defaultly in Go Runtime.
 */
@@ -63,13 +100,11 @@ Have a buffer capacity in a channel.
 
 Within the capacity in a buffered channel - Stores the data until the buffer capacity, Once buffer capacity reached, Then buffered channel sends data to the channel's reciever side.
 
-Once capacity is exceed in a buffered channel - Then it acts and works like unbuffered channel EX: send/receive at same time and blocking as mentioned above.
 
-Buffered channel use case: Doing things one after one EX: writing and reading one after one. Overall its used to improve the performance among the goRoutines and also reduces the chances of deadlock errors due to the Asynchronous communication.
+Buffered channel use case: Doing things one after one EX: writing and reading one after one. Overall its used to improve the performance among the goRoutines by reducing the send and receive channel call and also reduces the chances of deadlock errors due to the Asynchronous communication.
 
 EX: A goRoutine received any data from Unbuffered channel, Then that data needs to do high multi level processing flow. So once the current data is proceesed then only next data can be readed from the unbuffered channel due to its blocking synchronous communication. But if used buffered channel, GoRoutine keep on reading the next data and added into queue upto the given buffer channel length. So overall improves the performance.
 
-So we can buffered channel as well for all the below examples in this file.
 */
 
 /*
@@ -133,6 +168,12 @@ sync/atomic package:
 It prevents racing conditions on simple integer increment and decrement values.
 Refer - checkRaceConditionWithAtomic()
 
+Ways to maintain the order of goutines execution:
+Waitgroup
+
+Using channels receiver to order the gorotine exection. EX: Inside second Goroutine, channel1 receiver waits until first routine completes sends the signal to the channel1. After that second goRoutine execution starts.
+
+Using mutex lock and unlock
 
 Concurrency design patterns:
 for-Select-Done pattern
@@ -153,6 +194,11 @@ Check this after sometime:
 https://www.sobyte.net/post/2022-07/go-sync-cond/
 sync.NewCond()
 
+
+Semaphore:
+A Semaphore is a concurrency design pattern, Where can can limit the number of goRoutines can access something (or) Can work at a time.
+
+Use case: No of Connections in a DB/any component, rate limiting, limiting concurrency
 
 */
 
@@ -661,6 +707,25 @@ func InterruptORKillGoRoutine() {
 	// }()
 
 	// p("main thread completes InterruptGoRoutine()")
+}
+
+func GoRoutineOrderOfExecutionUsingChannel() {
+	firstDone := make(chan struct{})
+	secondDone := make(chan struct{})
+
+	go func() {
+		fmt.Println("First goroutine executed")
+		close(firstDone) // Signal that the first goroutine is done
+	}()
+
+	go func() {
+		<-firstDone // Wait for the first goroutine to complete
+		fmt.Println("Second goroutine executed")
+		close(secondDone) // Signal that the second goroutine is done
+	}()
+
+	// Ensure the main function doesn't exit before the second goroutine
+	<-secondDone
 }
 
 func TimePackageWithConcurrency() {
@@ -1402,6 +1467,12 @@ func GoRoutineLeakExample() {
 	}
 	fmt.Printf("#goroutines: %d\n", runtime.NumGoroutine())
 
+	GoRoutineleak1()
+	for {
+		time.Sleep(1 * time.Second)
+		fmt.Println(runtime.NumGoroutine())
+	}
+
 }
 
 func GoRoutineLeak() {
@@ -1412,6 +1483,18 @@ func GoRoutineLeak() {
 	go func() { ch <- 100 }()
 	<-ch // Doing only one channel reading for one GoRoutine, So other two channel value reading from two goRoutines, Keep on waiting.
 	//Normal simple .go, Once main() executes all GoRoutines going to terminate it. But in prod cases, Main() mostly running always. So this GoOrutine leak impact a lot.
+}
+
+func GoRoutineleak1() {
+	ch := make(chan int)
+	//It launches a goroutine that
+	// blocks receiving from a channel. Nothing will ever be
+	// sent on that channel and the channel is never closed so
+	// that goroutine will be blocked forever.
+	go func() {
+		val := <-ch
+		fmt.Println("We received a value:", val)
+	}()
 }
 
 // multiple go-routines order the execution by using channels.
@@ -1587,4 +1670,38 @@ func FanOut_FanIn_ConcurrencyPattern() {
 	for result := range results {
 		fmt.Println("Fan-In aggregated result", result)
 	}
+}
+
+func taskI() {
+
+	for i := 0; i < 10; i++ {
+		//runtime.Gosched() - suspends temporarily the current goRoutine execution and allows other goRoutines to execute. Then runtime.Gosched() resumes the current GoRoutine execution.
+
+		//Use it very cautiously, Its better to use channel,mutex, waitgroup than this.
+
+		//Use case - We can use it When one GoRoutine has heavy work and may take more time to execute and other goRoutines may have to wait for some time to take CPU control, So we can use runtime.Gosched() for allow other GoRoutine to take their own turns for some time.
+		runtime.Gosched()
+		fmt.Println("Task 1:", i)
+	}
+}
+
+func taskII() {
+	for i := 0; i < 10; i++ {
+		fmt.Println("Task 2:", i)
+	}
+
+}
+
+func taskIII() {
+	for i := 0; i < 10; i++ {
+		fmt.Println("Task 3:", i)
+	}
+}
+
+func GoScheduleRuntime() {
+	go taskI()
+	go taskII()
+	go taskIII()
+
+	time.Sleep(time.Second * 3) // Wait for both tasks to finish (approximately)
 }
