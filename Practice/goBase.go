@@ -17,7 +17,7 @@ import (
 
 interpreted vs compiled programming language execution process and performance:
 
-Compiled - Compiling whole Code converted/compiled directly into machine binary code(0’s and 1’s) once that the OS processor can understand and execute. So compiled language removes the interpreter middle man and there is no need to transalate code into OS processor for undertanding, So it increases the performance. EX: two native persons speaks directly in there native language, So communication went efficiently.
+Compiled - Compiling whole Code converted/compiled directly into machine binary code(0’s and 1’s) so that the OS processor can understand and execute. So compiled language removes the interpreter middle man and there is no need to transalate code into OS processor for undertanding, So it increases the performance. EX: two native persons speaks directly in there native language, So communication went efficiently.
 
 Interpreted languages are also called scripting languages, because they use an interpreter to translate code line by line at runtime. (Like movie scripts happens scene by scene)
 Interpreted - In run time interpreting, virtual machine changes the actual code line by line into Some other format (ex: opcode(or) 0’s and 1’s  in python ), then the OS processor understands and executes code.
@@ -25,6 +25,11 @@ Interpreted - In run time interpreting, virtual machine changes the actual code 
 Even in a for loop with 100 iterations, the interpreted freshly translates the code for each iteration again and again.
 
 python's .pyc is bytecode(Which is more compact and optimized representation of the Python code) that's not equalent to the compiled language's compiled binary file.
+
+Choosing a programming language for application/task development:
+i)programming language code execution performance
+ii)Easier Code development for current and furture requirements with speed with the help of programming language's frameworks, packages support.
+
 
 https://stackoverflow.com/questions/38491212/difference-between-compiled-and-interpreted-languages
 
@@ -48,8 +53,15 @@ Python has more number of package support and community support than golang.
 Golang code is more faster than python EX: compare normal same "hello world" program to same algorithm programs.
 Golang has inbuilt and more efficent concurrency like GoRoutine with channels support. Python multithreading is not light weight and not effcient as Golang and have to use "multithreading" package.
 Python thread is preferred for I/O bound tasks only, Where python multiprocessing is preferred for CPU-bound tasks, Where GoROutine is fine for both I/O bound and CPU bound tasks, So Routines don't need multiprocessing seperately.
-Golang is preferred in development of high performance required real time application, microservices, cloud computing, system programming like direct OS hardware applications like drivers.
 Python is definitely preferred in Data analytics/Data scientist/Machine learning areas and Web application development beacuse of more mature with more inbuilt features frameworks like django and flask.
+
+golang preferred development:
+Golang is preferred in development of high performance required real time application, microservices, high concurrency application, Due to golangs's single binary file which is useful in developing containerization applications which uses docker and kubernetes, devops tools development like docker, kubernetes, cloud computing, system programming like direct OS hardware applications like drivers.
+
+golang non-preferred development so far:
+Mobile app development
+GUI application
+Machine learning
 
 
 Golang Top features:
@@ -70,8 +82,10 @@ go doesn't support ternary '?:' operator
 /*
 --------Go environment:
 
-Package - (directory/folder of go files).
-Module -- If a package has a go.mod file, Then it is considered as module. In cases multiple packages can also have a common go.mod file.
+
+Package - (directory/folder of go file(s)).
+Module -- If a package has a go.mod file, Then it is considered as module.
+multiple packages can also have a common go.mod file.
 
 
 //create go.mod file under directory
@@ -80,8 +94,6 @@ go mod init directory_name/folder_name
 go.mod keeps the list of import packages(our own go packages and third party go packages) in the particular package(s).
 go.mod - For installing/updating/uninstalling packages will be automatically updated in go.mod. (Like python pip requirements.txt)
 
-package main (main package) - In each go file -- is considered as parent directory_name/folder_name.
-package "child_folder_name"(sub-package)  -- child_folder_name located inside parent directory_name/folder_name.
 
 Running a go file -- go run file.go:
 package main  --- Package should be the "main"
@@ -95,16 +107,41 @@ both package and function should be "main" for executing. It is considered an en
 init()
 All declared init(), Called only once before main(), When we running particular package. We can use for load initial values and having client connections etc.
 
+Golang package structure:
+
+Simple structure:
+repoWorkspace/main.go
+	  		  app.go (optional)
+	  		  go.mod
+	  		  go.sum
+
+
+
+intermediate/large project:
+repoWorkspace/
+			cmd/myapp/main.go
+					  app.go (optional)
+			internal/data/data.go
+					/businessLogic/logic.go
+					/db/mongo.db
+					/model/model.go
+			go.mod
+			go.sum
+
+cmd package - Go convention to put main.go for the application's entrypoint.
+internal package - Go convention to avoid outside projects/workspace to import files under internal package.
+
+
 
 //Download other 3rd party package/repo EX: pip install
 go get Outside_package_name
-go get -u github.com/spf13/cobra   //latest version installed
+go get -u github.com/spf13/cobra   //upgrade to latest version
 go get github.com/spf13/cobra@v1.5.1 //particular package version
 go get github.com/spf13/cobra@4rf356 //package particular git commit
 
 go mod download  – this download all listed packages in go.mod file and stores in GOPATH/pkg/mod
 
-Once you installed package, automatically below require() section included in go.mod file
+go.mod file:
 
 require (
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
@@ -115,7 +152,7 @@ require (
 // indirect  --- These "indirect" -- this mousetrap package we are not downloaded. This package is used by our other installed package "cobra". So we use this package indirectly.
 
 
-go mod tidy: (syncs the package information in go.mod and go.sum file automatically and download and installs packages using "go get" automatically)
+go mod tidy: (syncs the package information in go.mod and go.sum file automatically and download and installs packages)
 If we added/remove an import package in a go file. Then run "go mod tidy", it will add/remove package informations in go.mod and go.sum
 
 go.sum:
@@ -231,7 +268,23 @@ supports offline build during the CI pipeline stages.
 Reproducable builds because we maintains the same package and its versions through go vendor.
 Cases we can reduce the docker image size by reusing the vendor folder of packages
 
-Hownever still go.mod way of automatically managing packages withoug go vendor is advisable in the production environment.
+However still go.mod way of automatically managing packages withoug go vendor is advisable in the production environment.
+
+
+how to set application should use go vendor packages instead of GOPATH/pkg/mod packages from go.mod file?
+
+By Using Vendor Mode:
+
+To instruct Go to use the vendor directory instead of the go.mod GOPATH/pkg/mod directory:
+
+i)Set the GOFLAGS environment variable:
+export GOFLAGS=-mod=vendor
+
+ii)Alternatively, you can pass the -mod=vendor flag directly when running your Go commands:
+
+go build -mod=vendor
+go test -mod=vendor
+go run -mod=vendor main.go
 /*
 
 ----Need/uses of pointers:
@@ -261,7 +314,7 @@ type Sample interface {
 ---------
 Variable declaration  – Creating a variable — Var i int
 Variable Assigning   – Assigns value to variable —  i:=10, var t = 20
-Variable initializers   – i:=10   – Gets variable type from the variable value.
+Variable initializers   EX: i:=10, var i int, var i int = 100   – initial value of a variable.
 
 
 -------golang formatting in fmt.printf():
@@ -270,7 +323,7 @@ fmt.Printf("%s %s %T %v %p", "saa", "34", "dfg", 134, &struct)
 
 %s - string value
 %d - int value
-%v - prints any data type value -- This is more useful
+%v - prints any data type value dynamically -- This is more useful
 %+v - prints structs with key:value format (useful in pointer structs also), remaining all same with "%v"
 %T - prints data type -- int, string etc
 %p - prints memory address, while passing value like this -- &slice, &struct etc
@@ -342,6 +395,8 @@ We can’t use these types as map keys.
 
 -------Memory allocation in golang:
 
+Both stack and heap memory are controlled by the GO Runtime in golang.
+
 Stack memory(LIFO) in GO and broad terms – Used to store all function calls and complete the function calls in LIFO order and functions' memory like arguments,returns and local variables. Once a particular function call is completed, The same is removed in stack memory.
 
 EX: func main() {
@@ -366,7 +421,7 @@ If the stack size memory exceeds, Generally “Stackoverflow” errors return.
 Heap memory using often data types - go Slice, Maps and Slice/map inside struct uses heap memory, new(), make() function variables uses heap memory in golang etc
 Still Go Runtime will decide accordingly and store other data in heap as well.
 
-Both stack and heap memory are controlled by the GO Runtime in golang.
+
 
 ---------Golang Garbage Collection:
 
@@ -383,7 +438,7 @@ We can manually trigger, Once you are clear/delete the large data types like abo
 ------When Garbage collection triggers automatically:
 Golang auto garbage collection does memory cleaning periodically like every 2 minutes or Once heap memory reaches the auto predefined threshold limit, Assume if a particular heap memory variable is used and not required anymore inside a function. Then auto garbage collection cleans those heap memory variables.
 
-We can turn off auto garbage collection entriely ans also can put custom threshold values in environment variables EX: GOGC=off, GOGC=80, Defaulty GOGC=100
+We can turn off auto garbage collection entriely and also can put custom threshold values in environment variables EX: GOGC=off, GOGC=80, Defaulty GOGC=100
 
 
 Memory Leak Generally - Code assigns the memory but not releases back the memory, So the memory keep on increasing and affects the performance and can crash the application. Even garbage collector can't releases it, because more chances the memory still referenced for use.
@@ -407,6 +462,9 @@ Go inbuilt profiling for “testing” package testing functions:
 go test -cpuprofile cpu.prof -memprofile mem.prof -bench .
 
 https://hackernoon.com/go-the-complete-guide-to-profiling-your-code-h51r3waz
+
+---------Init() and global variables and main() execution order
+https://david-yappeter.medium.com/init-in-go-programming-31e2c2bc2371
 
 ------Unsafe pointer:
 Generally pointer are more restricted and safer standards in golang like

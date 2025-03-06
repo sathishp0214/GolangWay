@@ -56,6 +56,18 @@ if None:  #similar to zero or False value
     print("Not executed this if condition")
 
 
+
+#Mutable Objects data types: Lists, dictionaries, sets
+#Mutable Objects: Their state can be changed after creation
+
+
+#ImMutable Objects data types: integers, floats, booleans, strings, tuples
+#Immutable Objects: Their state cannot be changed after creation.  If you try to modify an immutable object, Python creates a new object with the changed value, leaving the original object unchanged.
+
+#pass by reference and pass by value:
+#In functions in python, We always passes the reference but depends upon the mutable or immutable objects, It works as pass by reference and pass by value. 
+
+
 #2------------> Data type conversions
 
 #converting data type using list(), set(), tuple() between them
@@ -543,6 +555,11 @@ class Sample(ParentSample):
         self.multiply = x*y
         return self.multiply
     
+     # Declaring private method
+    def __fun(self):
+        self.__privateVariable = 120   # Declaring private variable
+        print("Private method")
+    
     # def parentFunction(self):
     #     print("child class same parent function name")
 
@@ -792,7 +809,8 @@ for i in w:
 
 
 
-
+# if __name__ =="__main__":   #this condition passes only by running the current .py file.
+    #DriverFunction()    #This driver function will only be called by running the current .py script.
 
 
 

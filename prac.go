@@ -1,117 +1,69 @@
 package main
 
 import (
-	"errors"
+	"encoding/json"
 	"fmt"
-	"sync"
-	"time"
+	"net/http"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
-var wg sync.WaitGroup
-
-// func main() {
-// 	// start := time.Now()
-
-// 	// wg.Add(4)
-
-// 	// firstchan := make(chan string)
-// 	// secondchan := make(chan string)
-// 	// thirdchan := make(chan string)
-// 	// fourthchan := make(chan string)
-
-// 	// go FourthFunc(fourthchan)
-// 	// go SecondFunc(secondchan)
-// 	// go FirstFunc(firstchan)
-// 	// go ThirdFunc(thirdchan)
-
-// 	// fmt.Println(<-firstchan)
-// 	// fmt.Println(<-secondchan)
-// 	// fmt.Println(<-thirdchan)
-// 	// fmt.Println(<-fourthchan)
-
-// 	// wg.Wait()
-
-// 	// fmt.Printf("Total time to finish : %s \n", time.Since(start).String())
-
-// 	f := func() {
-// 		n := 0
-// 		fmt.Println("hello", n)
-// 		n++
-// 	}
-
-// 	fmt.Println(f)
-// 	f()
-// 	f()
-// 	f()
-
-// }
-
-type DivisionError struct {
-	IntA int
-	IntB int
-	Msg  string
+type User struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
 }
 
-func (e *DivisionError) Error() string {
-	return e.Msg
-}
-
-func Divide(a, b int) (int, error) {
-	if b == 0 {
-		return 0, &DivisionError{
-			Msg:  fmt.Sprintf("cannot divide '%d' by zero", a),
-			IntA: a, IntB: b,
-		}
-	}
-	return a / b, nil
+type Post struct {
+	ID    int    `json:"id"`
+	Title string `json:"title"`
+	UserID int    `json:"user_id"`
 }
 
 func main() {
-	a, b := 10, 0
-	result, err := Divide(a, b)
-	if err != nil {
-		var divErr *DivisionError
-		switch {
-		case errors.As(err, &divErr):
-			fmt.Printf("%d / %d is not mathematically valid: %s\n",
-				divErr.IntA, divErr.IntB, divErr.Error())
-		default:
-			fmt.Printf("unexpected division error: %s\n", err)
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
+
+	// Endpoint to fetch user by ID
+	r.Get("/users/{userId}", func(w http.ResponseWriter, r *http.Request) {
+		userID := chi.URLParam(r, "userId")
+
+		// Simulate fetching user data from a database (replace with actual logic)
+		user := User{
+			ID:   1,
+			Name: "John Doe",
 		}
-		return
-	}
 
-	fmt.Printf("%d / %d = %d\n", a, b, result)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(user)
+	})
+
+	// Endpoint to fetch posts (assuming filtering by user ID is supported)
+	r.Get("/posts", func(w http.ResponseWriter, r *http.Request) {
+		userID := r.URL.Query().Get("userId")
+
+		// Simulate fetching posts from a database (replace with actual logic)
+		posts := []Post{
+			{ID: 1, Title: "Post 1", UserID: 1},
+			{ID: 2, Title: "Post 2", UserID: 2},
+		}
+
+		var userPosts []Post
+		for _, post := range posts {
+			if post.UserID == parseUserID(userID) { // Assuming helper function to parse user ID
+				userPosts = append(userPosts, post)
+			}
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(userPosts)
+	})
+
+	fmt.Println("Server listening on port 8080")
+	http.ListenAndServe(":8080", r)
 }
 
-func FirstFunc(ch chan<- string) {
-	fmt.Println("-- Executing first function --")
-	time.Sleep(7 * time.Second)
-	defer wg.Done()
-
-	ch <- "-- First Function finished --"
-}
-
-func SecondFunc(ch chan<- string) {
-	fmt.Println("-- Executing second function --")
-	// time.Sleep(5 * time.Second)
-	defer wg.Done()
-
-	ch <- "-- Second Function finished --"
-}
-
-func ThirdFunc(ch chan<- string) {
-	fmt.Println("-- Executing third function --")
-	time.Sleep(25 * time.Second)
-	defer wg.Done()
-
-	ch <- "-- Third Function finished --"
-}
-
-func FourthFunc(ch chan<- string) {
-	fmt.Println("-- Executing fourth function --")
-	// time.Sleep(10 * time.Second)
-	defer wg.Done()
-
-	ch <- "-- Fourth Function finished --"
+func parseUserID(userID string) (int, error) {
+	// Implement logic to parse user ID from string to integer
+	// Handle potential errors during parsing
 }

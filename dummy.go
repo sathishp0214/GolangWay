@@ -87,15 +87,39 @@ type MockUserService struct {
 	mock.Mock
 }
 
+var ch = make(chan string)
+
 func main() {
 	// go longRunningTask("Routine A")
 	// go longRunningTask("Routine B")
 
 	// time.Sleep(10 * time.Second) // Wait for both routines to finish
 
-	d := MockUserService{}
-	d.Called()
+	// d := MockUserService{}
+	// d.Called()
 
+	go running()
+
+	ch <- "sss"
+
+	// time.Sleep(10 * time.Second)
+
+	ch <- "sss1"
+
+	// time.Sleep(10 * time.Second)
+
+	ch <- "sss2"
+}
+
+func running() {
+	for {
+		select {
+		case d := <-ch:
+			time.Sleep(10 * time.Second)
+			fmt.Println("received", d)
+		default:
+		}
+	}
 }
 
 type SliceFn[T any] struct {

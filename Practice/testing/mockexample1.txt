@@ -1,0 +1,181 @@
+Here is a comprehensive tutorial with a **cheatsheet** and example code for **`github.com/stretchr/testify/mock`** and **`gomock`**, two popular mocking libraries in Golang.
+
+---
+
+## **1. `testify/mock` Tutorial**
+
+The `testify/mock` package is simple and straightforward, allowing you to create mocks and define expectations for your tests.
+
+### **Key Features**
+- Mock functions with predefined return values.
+- Verify that methods were called with expected arguments.
+- Flexible argument matchers (e.g., exact match, any type).
+
+### **Cheatsheet**
+
+| Feature                        | Code Snippet                                              |
+|--------------------------------|----------------------------------------------------------|
+| Create a mock                  | `type MyMock struct { mock.Mock }`                       |
+| Mock a function                | `m.On("FuncName", arg1).Return(returnValue, err)`        |
+| Call the mock function         | `m.Called(arg1, arg2)`                                   |
+| Verify function calls          | `m.AssertCalled(t, "FuncName", arg1)`                   |
+| Check no unexpected calls      | `m.AssertExpectations(t)`                                |
+| Match any argument             | `mock.Anything`                                          |
+| Match specific type            | `mock.MatchedBy(func(arg Type) bool { return true })`    |
+
+---
+
+### **Example: `testify/mock`**
+
+#### **Step 1: Define the Interface**
+```go
+package main
+
+type Service interface {
+    DoSomething(input string) (string, error)
+}
+```
+
+#### **Step 2: Create a Mock**
+```go
+package main
+
+import "github.com/stretchr/testify/mock"
+
+// MockService is a mock implementation of Service
+type MockService struct {
+    mock.Mock
+}
+
+func (m *MockService) DoSomething(input string) (string, error) {
+    args := m.Called(input)
+    return args.String(0), args.Error(1)
+}
+```
+
+#### **Step 3: Write a Unit Test**
+```go
+package main
+
+import (
+    "testing"
+
+    "github.com/stretchr/testify/mock"
+    "github.com/stretchr/testify/assert"
+)
+
+func TestService(t *testing.T) {
+    mockService := new(MockService)
+
+    // Set up expectations
+    mockService.On("DoSomething", "input").Return("output", nil)
+
+    // Call the mock method
+    result, err := mockService.DoSomething("input")
+
+    // Assertions
+    assert.NoError(t, err)
+    assert.Equal(t, "output", result)
+
+    // Verify expectations
+    mockService.AssertCalled(t, "DoSomething", "input")
+    mockService.AssertExpectations(t)
+}
+```
+
+---
+
+## **2. `gomock` Tutorial**
+
+The `gomock` package is a more feature-rich and strict mocking library that works well for larger, complex projects.
+
+### **Key Features**
+- Generate mocks using `mockgen`.
+- Strongly typed mocks.
+- Flexible argument matching.
+- Focus on strict testing with ordered/unordered expectations.
+
+### **Cheatsheet**
+
+| Feature                        | Code Snippet                                              |
+|--------------------------------|----------------------------------------------------------|
+| Install `mockgen`              | `go install github.com/golang/mock/mockgen@latest`       |
+| Generate mocks                 | `mockgen -source=service.go -destination=mock_service.go`|
+| Create a controller            | `ctrl := gomock.NewController(t)`                        |
+| Create a mock instance         | `mockSvc := NewMockService(ctrl)`                        |
+| Set expectations               | `mockSvc.EXPECT().Method(arg).Return(value, error)`      |
+| Any argument                   | `gomock.Any()`                                           |
+| Custom matcher                 | `gomock.AssignableToTypeOf(argType)`                    |
+| Verify expectations            | `ctrl.Finish()` (done automatically by `defer`)          |
+
+---
+
+### **Example: `gomock`**
+
+#### **Step 1: Define the Interface**
+```go
+package main
+
+type Service interface {
+    DoSomething(input string) (string, error)
+}
+```
+
+#### **Step 2: Generate a Mock**
+Run the `mockgen` tool:
+```bash
+mockgen -source=service.go -destination=mock_service.go -package=main
+```
+
+This generates a mock file named `mock_service.go`.
+
+---
+
+#### **Step 3: Write a Unit Test**
+```go
+package main
+
+import (
+    "testing"
+
+    "github.com/golang/mock/gomock"
+    "github.com/stretchr/testify/assert"
+)
+
+func TestService(t *testing.T) {
+    ctrl := gomock.NewController(t)
+    defer ctrl.Finish()
+
+    mockSvc := NewMockService(ctrl)
+
+    // Set up expectations
+    mockSvc.EXPECT().DoSomething("input").Return("output", nil)
+
+    // Call the mock method
+    result, err := mockSvc.DoSomething("input")
+
+    // Assertions
+    assert.NoError(t, err)
+    assert.Equal(t, "output", result)
+}
+```
+
+---
+
+## **Comparison: `testify/mock` vs `gomock`**
+
+| Feature                 | `testify/mock`                        | `gomock`                                  |
+|-------------------------|----------------------------------------|-------------------------------------------|
+| Ease of use             | Simple and beginner-friendly          | Slightly complex; requires `mockgen`      |
+| Type safety             | No (relies on `interface{}`)          | Yes (strongly typed mocks)                |
+| Mock generation         | Manual (define structs and methods)   | Automated (`mockgen` tool)                |
+| Flexibility             | Good for small to medium projects     | Suitable for complex, large projects      |
+| Argument matching       | Basic (`mock.Anything`)               | Advanced (`gomock.AssignableToTypeOf`)    |
+
+---
+
+## **Conclusion**
+- Use **`testify/mock`** for simplicity and smaller projects.
+- Use **`gomock`** for type-safe, complex mocking in larger codebases.
+
+Both libraries are effective, so choose based on your project requirements.
