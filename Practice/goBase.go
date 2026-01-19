@@ -17,7 +17,7 @@ import (
 
 interpreted vs compiled programming language execution process and performance:
 
-Compiled - Compiling whole Code converted/compiled directly into machine binary code(0’s and 1’s) so that the OS processor can understand and execute. So compiled language removes the interpreter middle man and there is no need to transalate code into OS processor for undertanding, So it increases the performance. EX: two native persons speaks directly in there native language, So communication went efficiently.
+Compiled - Compiling whole Code converted/compiled directly into machine binary code(0’s and 1’s) single time, so that the OS processor can understand and execute. So compiled language removes the interpreter middle man and there is no need to transalate code into OS processor for undertanding, So it increases the performance. EX: two native persons speaks directly in there native language, So communication went efficiently.
 
 Interpreted languages are also called scripting languages, because they use an interpreter to translate code line by line at runtime. (Like movie scripts happens scene by scene)
 Interpreted - In run time interpreting, virtual machine changes the actual code line by line into Some other format (ex: opcode(or) 0’s and 1’s  in python ), then the OS processor understands and executes code.
@@ -26,9 +26,9 @@ Even in a for loop with 100 iterations, the interpreted freshly translates the c
 
 python's .pyc is bytecode(Which is more compact and optimized representation of the Python code) that's not equalent to the compiled language's compiled binary file.
 
-Choosing a programming language for application/task development:
-i)programming language code execution performance
-ii)Easier Code development for current and furture requirements with speed with the help of programming language's frameworks, packages support.
+Choosing a interpreted vs dynamic programming language for application/task development:
+
+i)current and future requirements interms of developer's current knowledge and developer's confidence/comfort/speed of doing in a programming language or programming language's frameworks, packages support EX: pandas, numpy etc, inbuilt features like decorators, inheritance, exceptions etc is very important. (if dynamic language is preferred here, then choose dynamic language otherwise choose compiled language)
 
 
 https://stackoverflow.com/questions/38491212/difference-between-compiled-and-interpreted-languages
@@ -41,24 +41,31 @@ Both python's dictonary and Golang's Map both uses the hash table data structure
 Hash table uses O(1) for both data inserting and searching/reading. Array uses O(log n) for data searching/reading, So hash table is more faster.
 
 
-Golang supports Self-Contained Binaries - Once we have the golang compiled binary file, We don't need any dependenies source code files/libraries like go.mod/go.sum etc. Just we should have golang installed, Then we can execute the golang compiled binary file directly on any machines.
+Golang supports Self-Contained Binaries -
+
+A self-contained binary is a single executable(.exe) file that includes:
+Your code
+The Go runtime
+All dependencies (standard and third-party packages) EX: packages like net, Gin, mux
+
+Once we builded the golang compiled binary file using "go build" with expected executing OS architecture like linux or windows, Then We don't need any dependenies source code files/libraries and go.mod/go.sum etc. we can execute the golang compiled binary file directly on any machines like any other .exe executable file.
 
 
 Python vs Golang:
 
-Golang doesn't support exceptions,inheritance,oop constructor like python.
-Golang anonymous is more powerful than python anonymous functions. python anonymous functions supports only single line statements and return it.
-Python doesn't supports pointers, defer statements. Python supports exception's "finally" and "with" statement instead of "defer".
-Python has more number of package support and community support than golang.
-Golang code is more faster than python EX: compare normal same "hello world" program to same algorithm programs.
+Golang doesn't support exceptions,decorator,inheritance,oop constructor like python.
+Golang anonymous is more powerful than python anonymous functions. python anonymous functions supports only single line statements and automatically return it.
+Python doesn't supports pointers, defer statements. Python supports exception's "finally" or "with" statement instead of "defer".
+currently Python has more number of package support and community support than golang.
+Golang production compiled code is more faster than python production code EX: compare normal same "hello world" program to same higher algorithm programs.
 Golang has inbuilt and more efficent concurrency like GoRoutine with channels support. Python multithreading is not light weight and not effcient as Golang and have to use "multithreading" package.
 Python thread is preferred for I/O bound tasks only, Where python multiprocessing is preferred for CPU-bound tasks, Where GoROutine is fine for both I/O bound and CPU bound tasks, So Routines don't need multiprocessing seperately.
-Python is definitely preferred in Data analytics/Data scientist/Machine learning areas and Web application development beacuse of more mature with more inbuilt features frameworks like django and flask.
+Python is definitely preferred in Data analytics/Data scientist/Machine learning areas and Web application development beacuse of more mature with more inbuilt features and frameworks like django and flask.
 
 golang preferred development:
-Golang is preferred in development of high performance required real time application, microservices, high concurrency application, Due to golangs's single binary file which is useful in developing containerization applications which uses docker and kubernetes, devops tools development like docker, kubernetes, cloud computing, system programming like direct OS hardware applications like drivers.
+Golang is generally preferred in development of high performance required real time applications, microservices, high concurrency application, Due to golangs's single binary file which is useful in developing containerization applications which uses docker and kubernetes, devops tools development like docker, kubernetes, cloud computing, system programming like direct OS hardware applications like drivers.
 
-golang non-preferred development so far:
+golang currently non-preferred development so far:
 Mobile app development
 GUI application
 Machine learning
@@ -105,7 +112,7 @@ func main() {   --- Function should be the "main"
 both package and function should be "main" for executing. It is considered an entrypoint and this main() is called first, from here we can call other functions.
 
 init()
-All declared init(), Called only once before main(), When we running particular package. We can use for load initial values and having client connections etc.
+All declared init(), Called only once before main(), When we running particular package. We can use for load initial values and initializing client connections etc.
 
 Golang package structure:
 
@@ -155,7 +162,7 @@ require (
 go mod tidy: (syncs the package information in go.mod and go.sum file automatically and download and installs packages)
 If we added/remove an import package in a go file. Then run "go mod tidy", it will add/remove package informations in go.mod and go.sum
 
-go.sum:
+go.sum: Stores the package checksum informations. (Checksum means generally - like hash id - creates id for current software package, if its modified or corrupted from checksum id we can compare and find it)
 
 go.mod and go.sum file works together. "go mod tidy" -- syncs the both go.mod and go.sum files.Mostly we are works directly with go.sum file
 
@@ -176,7 +183,7 @@ GOPATH's folders:
 
 GOPATH/src -- contains project source/repo code
 
-GOPATH/pkg/mod -- In mod directory, stores the project's go.mod packages.
+GOPATH/pkg/mod -- In mod directory, stores the project's go.mod packages files.
 
 go clean - Used to remove already builded binary file and internal temporary files that can be deleted
 
@@ -201,11 +208,11 @@ go get -- download and install package and maintain dependency with go.mod file.
 
 go run -- single step of compiling and executing go file. It will not store any binary file. (its for local development env purpose)
 
-go build -- creates executable compiled binary file in the same directory. If any change in code, again I have to do the go build. Overall avoids repeated compiling time and can run this compiled file in different OS also. (its for production environment purpose)
+go build -- creates executable compiled binary file in the same directory. If any change in code, again I have to do the go build. Overall avoids repeated compiling time. (its for production environment purpose)
 To Run a go builded file in terminal -- ./compiled_file
 
-go install --(go build + go install) this also create "go build's" executable binary file for our own packages/3rd party packages and stores in this path $GOPATH/bin.
-Go install doesn't change anything in go.mod dependencies.
+go install -- It installs the go package in the system's level. we can access from cli like tool/application ex- "python" code.py
+
 
 Go build/install useful for production environments
 
@@ -213,7 +220,7 @@ Go build/install useful for production environments
 
 go doc strings   //This terminal command list all functions in strings function with function arguments and return types
 
-go doc strings contains  //Gives the brief instruction for “contains” function in strings package
+go doc strings contains  //Gives the brief instruction for “contains” function signature in strings package
 
 
 
@@ -247,6 +254,7 @@ go help   //list go help commands
 go help run  //detailed info of each command
 go help build
 go help doc
+go help vet
 
 go doc -help   // -help will give detail info of other set of commands
 goimports -help  //Manually do go imports on pacakge/file
@@ -263,10 +271,10 @@ To have to manually update the go vendor everytime we add or update or delete th
 
 Uses:
 
-Maintain particular package versions for stable build or to avoid conflict issues with other packages or environment.
-supports offline build during the CI pipeline stages.
-Reproducable builds because we maintains the same package and its versions through go vendor.
-Cases we can reduce the docker image size by reusing the vendor folder of packages
+Maintain particular extact package versions for stable build or to avoid conflict issues with other packages or environment.
+can do faster build during the CI pipeline stages because of don't need to download package everytime.
+Reproducable builds with the extact package versions because we maintains the same package and its versions through go vendor.
+Cases we can reduce the docker image size by reusing the vendor folder of packages and faster builds.
 
 However still go.mod way of automatically managing packages withoug go vendor is advisable in the production environment.
 
@@ -332,7 +340,7 @@ fmt.Printf("%s %s %T %v %p", "saa", "34", "dfg", 134, &struct)
  ---dot (.) import:
  import . "fmt"     // We can directly use packages function without "fmt." -- Println("hello")
 
- -------“Blank identifier” underscore “_” also known as “Blank identifier”
+ -------“Blank identifier” underscore “_” also known as “Blank identifier” - To avoid declared and not used compilation error.
 Used for unused variables mostly in for range loops and err return value from function
 Used for unused import in a go file
 
@@ -397,7 +405,7 @@ We can’t use these types as map keys.
 
 Both stack and heap memory are controlled by the GO Runtime in golang.
 
-Stack memory(LIFO) in GO and broad terms – Used to store all function calls and complete the function calls in LIFO order and functions' memory like arguments,returns and local variables. Once a particular function call is completed, The same is removed in stack memory.
+Stack memory(LIFO) in GO and broad terms – Used to store all function calls and complete the function calls in LIFO order and functions' memory like arguments,returns and function's local variables. Once a particular function call is completed, The same is removed in stack memory.
 
 EX: func main() {
 	log()
@@ -418,7 +426,7 @@ If the stack size memory exceeds, Generally “Stackoverflow” errors return.
 
 ------Heap memory in GO and broad terms: Used for handling dynamic memory and global variables/long term memory having scope beyond stack memory’s function call.
 
-Heap memory using often data types - go Slice, Maps and Slice/map inside struct uses heap memory, new(), make() function variables uses heap memory in golang etc
+Heap memory using often data  - go Slice, Maps and Slice/map inside struct uses heap memory, new(), make() function variables uses heap memory in golang, function returning values, channel passing values etc
 Still Go Runtime will decide accordingly and store other data in heap as well.
 
 
@@ -441,12 +449,14 @@ Golang auto garbage collection does memory cleaning periodically like every 2 mi
 We can turn off auto garbage collection entriely and also can put custom threshold values in environment variables EX: GOGC=off, GOGC=80, Defaulty GOGC=100
 
 
-Memory Leak Generally - Code assigns the memory but not releases back the memory, So the memory keep on increasing and affects the performance and can crash the application. Even garbage collector can't releases it, because more chances the memory still referenced for use.
+Memory Leak Generally - Code assigns the memory but not releases back that memory, So the memory keep on increasing and affects the performance and can crash the application. Even garbage collector can't releases it, because more chances the memory still referenced for use.
 
 Memory Leak scenarios:
 Global variable slice,Map - Keep on adding the values, But not removes it. (Add the expiration logic and periodically check it for deletion)
+Functions thats keep on running infinitely and slices,maps inside it keep on storing like above scenerio - Should take care more for memory leak possibility.
 GoRoutines leak - check this function GoRoutineLeakExample()
-Functions thats keep on running infinitely - Should take care more for memory leak possibility.
+
+bottleneck means in generally - particular piece of code slows down the entire app because High CPU usage / slow response ex: huge computations, slow db connections and executions,
 
 
 Profiling in GO and broad term:
@@ -463,8 +473,13 @@ go test -cpuprofile cpu.prof -memprofile mem.prof -bench .
 
 https://hackernoon.com/go-the-complete-guide-to-profiling-your-code-h51r3waz
 
----------Init() and global variables and main() execution order
+--------- package, import package, Init() and global variables and main() execution order:
+
+EXample single main.go file execution order ---> package main ---> import packages -->constant variables --> global variables --> init() ---> main()
+
+
 https://david-yappeter.medium.com/init-in-go-programming-31e2c2bc2371
+
 
 ------Unsafe pointer:
 Generally pointer are more restricted and safer standards in golang like
@@ -475,10 +490,10 @@ Using unsafe package, We can do operations without the above restriction and add
 
 
 
-------GOPRIVATE environmental variable - We can set our project module in GOPRIVATE, Then that module considers a private module not available for public users to download it.
+------GOPRIVATE environmental variable - We can set our project module in GOPRIVATE, Then that module considers a private module not available for public users to download it from github, gitlab etc.
 
 
-----CGO in golang: CGO helps to cross-compilation - Helps to use C code in golang and golang code in C. The CGO_enabled option enables the CGO in our go environment, Defaultly its disabled CGO_enabled=0.
+----CGO in golang: CGO helps to cross-compilation - Helps to use C language libraries from golang. The CGO_enabled option enables the CGO in our go environment, Defaultly its disabled CGO_enabled=0.
 
 chi vs mux vs gin golang framework:
 chi and mux are almost similar, Mux is not maintained and almost deprecated. Both chi and mux are good for routing activities for api's CRUD operations.
@@ -490,6 +505,108 @@ name string `json:”name_of_user”`  //Example struct field name
 From struct’s variable names, Used to set key(or)field names for json, xml,yaml, sql column fields,bson(mongodb document key name) data
 
 Even we can use to validate more conditions EX: field is empty or not, valid email etc
+
+*/
+
+/*
+
+Golang official documentation facts:
+efficient compilation, efficient execution, ease of programming in single language
+
+Go combines the ease of programming of an interpreted, dynamically typed language with the efficiency and safety of a statically typed, compiled language.
+
+golang develped with the reference of multiple langunages like C,Pascal etc.
+
+golang used for developing in docker, kubernetes, terraform, Google cloud, consul etc.
+
+From golang code, We can call C language writtern packages/libaries using "cgo" and C++ language writtern packages/libaries using "SWIG"
+
+Golang may lack some features, intentionally due to the golang's uncompromised compilation speed and affects other available features.
+
+Golang normal map is not safe in race conditions, We Can use sync package's map for the same or lock/unlock mechanisms.
+
+*/
+
+/*
+every golang own (or) 3rd party EX:sarama import package should contain the go.mod file. That go.mod file only has the dependency modules and module version information, That is mandatory for installing and maintaing/upgrade/downgrade the module and module's dependency modules from go.mod file.
+
+circular dependency (or) cycle imports:
+
+If two packages are imported on each other causes circular dependency compilation error. EX: Package A imports Package B and Package B imports Package A.
+Its is a design issue. We should aware of this while designing and coding the package.
+
+We can eliminate this issue by design the depency in the seperate package like below Examples:
+A package depends/imports C
+B package depends/imports C
+
+A package depends/imports on B
+B depends on C
+D depends on A and B
+
+golang var a int declaration - Defaulty it will be int64 incase of 64 bit machine or int32 incase of 32 bit machine
+
+Go runtime compiler - determines the usage of stack and heap memory.
+
+Golang goroutines and channels are refered from Communicating Sequential Processes(CSP).(Communicating Sequential Processes (CSP) is a formal language for describing the interactions in concurrent systems, which was proposed by Tony Hoare in 1978. It models concurrent processes as sequential programs that communicate through synchronized message passing via channels.)
+
+Go supports both concurrency and parallelism.
+If we set GOMAXPROCS=1, then it eliminates the parallelism.
+
+Sometimes adding more CPUs can slow a program down. In practical terms, programs that spend more time synchronizing or communicating(I/O tasks) than doing useful computation may experience performance degradation when using multiple OS threads.
+
+Python uses lock/unlock based techniques for read/write the common data with the multiple threads involved.
+Python also has thread-safe data structure called queue.
+
+Go compiler(GC) written in golang.
+
+Golang is developed to match the performance of C language and Golang creators believes golang is very competitive interms of performance with other compiled programming languages. However they believes garbage collector is not fast enough and compiler is good and can be better.
+
+Golang doesn't supports pointer arithmetic as per offical documentation. pointer arithmetic means doing arithmetic operations like increment/decrement/add/substract on pointers directly.
+However In golang we can dereference the pointers and then only we can do the arithmethic operations on integer pointers.
+
+Golang generics use case:
+
+reverse
+sorting
+Find smallest/largest element in different slice types
+Find average/standard deviation of different slice types
+Compute union/intersection of different map types
+Find shortest path in node/edge graph
+Apply transformation function to slice/map, returning new slice/map
+
+Read from a channel with a timeout
+Combine two channels into a single channel
+Call a list of functions in parallel, returning a slice of results
+Call a list of functions, using a Context, return the result of the first function to finish, canceling and cleaning up extra goroutines
+
+
+
+channels vs mutex lock/unlock use case among multiple goRoutines:
+
+Channel should be used for sending data EX: distribute data, result data, signal values between the goRoutines.
+Combination of value passing/receing from channels. EX: Also whenever we received the channel value, We can trigger another goRoutine call also.
+
+lock/Unlock can be used in increment/decrement,boolean flag, dB read/write, slice/maps read/write.
+
+lock/Unlock has better performance than channels overall.
+
+Depends upon the simplicity of use case implementation, We can prefer either one of these.
+
+
+
+
+https://go.dev/doc/faq
+https://go.dev/doc/effective_go
+
+
+security vulnerbilities sample examples in golang.
+https://github.com/aws-samples/amazon-codeguru-golang-detectors/
+
+
+
+Gin framework - https://gin-gonic.com/docs/examples/
+
+system programming means in golang
 
 */
 
@@ -601,7 +718,9 @@ func main() {
 
 	// InbuiltGolangFunctionsLatest()
 
-	GenericsInStructExample()
+	// GenericsInStructExample()
+
+	StructCallByValueReferenceReceiver()
 
 }
 
@@ -675,9 +794,11 @@ func mutable_Immutable_DataTypes() {
 	// map	  ''
 	// chan    ''
 
+	//Pointer is also a data type, It holding the memory address for any data type. we can't modify the memory addres directly. So we have to dereference into value, then have to modify, EX: *pointer = 10, Then that particular data type EX: (int) nature is automatically came inside.
+
 	//immutable data types
 
-	//In simple Words - We can't directly modify the values EX: string[1]="a"
+	//In simple Words - We can't directly modify the values with same memory EX: string[1]="a"
 
 	//For modifying this We need to allocate new memory Example -- Either we need to change this string into any other data type like slice and then modify this (or) We can use the strings package's replace() funtion, Again this function use the new memory inside for modifying.
 
@@ -690,8 +811,6 @@ func mutable_Immutable_DataTypes() {
 	// struct
 
 	//another Value (or) New value assigning is possible for all data types
-
-	//For me -- Pointer is not a data type, It just Golang's feature for holding the memory address for any data type. So in this mutuable or immutable, Pointer just hold the memory address, So we can't modify the memory addres directly. So we have to dereference into value, then have to modify, EX: *pointer = 10, Then that particular data type EX: (int) nature is automatically came inside.
 
 }
 
@@ -748,7 +867,7 @@ func InbuiltGolangFunctionsLatest() {
 
 	//copy()
 	sourceSlice := []int{1, 2, 3, 4, 5}
-	//copy() does the deep copy in slices.
+	//copy() does the deep copy of slices.
 	//copy Destination slice should be in same length of source slice, So we can create using below make() with length or normal slice creation EX: destinationSlice := []int{40, 41, 42, 43, 44}
 	destinationSlice := make([]int, 5)
 	copy(destinationSlice, sourceSlice)
@@ -757,7 +876,7 @@ func InbuiltGolangFunctionsLatest() {
 	p(destinationSlice, sourceSlice)
 
 	//If the length of source and destination slice is different in copy()
-	//If source slice has 5 values, Destination slice has 3 values or viceversa. copy() copies only the destination slice length. (not useful in all situations)
+	//If source slice has 5 values, Destination slice has 3 values or viceversa. copy() copies only the destination slice length.
 	df := []int{1, 2, 3, 4, 5}
 	df1 := []int{10, 11, 12}
 	copy(df1, df)
@@ -779,6 +898,8 @@ func appendToSliceMoreEfficentMethod(initial []int, items []int) []int {
 }
 
 func slicing() {
+	//go doesn't support reverse/backward slicing like python
+	// Go doesn’t support slice stepping s[0:len(s):2]
 	Slice := []int{2, 3, 4, 5, 6, 7, 8}
 	p(Slice[2:4])
 }
@@ -826,7 +947,8 @@ func emptyInterface() {
 		fmt.Println("error in interface data type handling", value)
 	}
 
-	//Type assertion - Type assertion access data as particular data type in the interface data.
+	//Type assertion generally -  Type assertion is a programming technique where you tell the compiler to treat a variable as a specific type
+	// in golang acheive Type assertion access using interface.
 	var T interface{}
 	T = 10
 	T = "stringValue"
@@ -934,8 +1056,6 @@ type emptyStruct struct{}
 
 func pointerDeclaration() {
 
-	//For me -- Pointer is not a data type, It just Golang's feature for holding the memory address for any data type. So in this golang's mutuable or immutable data types, Pointer just hold the memory address
-
 	t := 100
 	structPointer := &SampleStruct{}
 	structPointer.er = &t
@@ -998,8 +1118,9 @@ func panicAndRecover() {
 
 func ByteAndRune() {
 	//rune vs byte
-	//byte - uint8 -- 8 bites -- it works only upto ascii values (0-255)
-	//rune -- int32 -- 32 bits -- It works ASCII and more broader unicode characters upto around 65000 types of characters
+	//generally 1 byte = 8 bits
+	//byte - uint8 -- 8 bites (1 byte in size) -- it works only upto ascii values (0-255)
+	//rune -- int32 -- 32 bits --(4 bytes in size) It works ASCII and more broader unicode characters upto around 65000 values of characters
 
 	//converts character to ascii/unicode and ascii/unicode to character using both (rune() and byte())
 	d := rune('A')
@@ -1036,9 +1157,9 @@ func varDeclaration() {
 	// var d1 SampleStruct //struct field's default values {0}
 
 	//Below same data types as pointers returns nil
-	var a *int    //default value 0
-	var b *string //default value empty string
-	var c *bool   //default value false
+	var a *int
+	var b *string
+	var c *bool
 	var d *SampleStruct
 
 	if a == nil && b == nil && c == nil && d == nil {
@@ -1051,6 +1172,8 @@ func varDeclaration() {
 	var e1 []int
 	var p interface{}
 	var p1 chan int
+	// var p3 chan interface{}  //allowed - can use interface as data in channel
+	// var p2 chan *int  -- different type pointer declaration also allowed in channel, will handle &int data through channels
 
 	if e == nil && e1 == nil && p == nil && p1 == nil { //condition passes true
 		fmt.Println("declare variables with var keywords returns nil--", e, e1, p, p1)
@@ -1058,7 +1181,7 @@ func varDeclaration() {
 
 	//now intialized the values, Now it will not return nil
 	e = map[int]int{1: 1, 2: 2}
-	e1 = []int{1, 2, 3}
+	e1 = []int{}
 	p = 100
 	p1 = make(chan int)
 
@@ -1090,7 +1213,7 @@ func typeCasting() {
 
 	//using byte slice is preferred here, Because its uint8 data type and its uses less memory
 
-	//This is Rune and Bytes most used real use case.
+	//This is Rune and Bytes type most used real use case.
 
 	fg11 := "sathish is hello"
 
@@ -1133,6 +1256,20 @@ func deferFunction() {
 		fmt.Println()
 	}
 
+	//multiple defer flow:
+
+	// defer fmt.Println("three")
+	// defer fmt.Println("two")
+	// defer fmt.Println("one")
+
+	// fmt.Println("main function body")
+
+	// Output:
+	// main function body
+	// one
+	// two
+	// three
+
 	// defer fmt.Println("defer statement executed")
 	// os.Exit(100) //Due to this os.Exit() program exits this line, Above defer statement even too not executed
 	// fmt.Println("normal statement")
@@ -1157,7 +1294,7 @@ func CallByValueDataTypes() {
 
 }
 
-// Memory creation in function arguments - Always creates new different memory for all function arguments even for pointer arguments, SomeHow these different pointer memory address is linked with actual pointer memory address for acheiving pass by reference effects.
+// Memory creation in function arguments - Always creates new different memory for all function arguments even for pointer arguments. SomeHow in design, these different pointer memory address is linked with actual pointer memory address for acheiving pass by reference effects.
 
 func CheckCallByValueDataTypes(intValue *int, floatValue *float64, strValue *string, boolValue *bool, arrayValue *[3]int, structValue *SampleStruct) {
 	*intValue = *intValue * *intValue
@@ -1201,7 +1338,7 @@ func CheckCallByReference(sliceValue []int, mapValue map[int]int, byteSlice []by
 
 	sliceValue[0] = 11 //Slice value assigns works as pass by reference
 
-	sliceValue = append(sliceValue, 40) //Slice append() not works as pass by reference,Works same for all data types slice. Refer google docs notes
+	sliceValue = append(sliceValue, 40) //Slice append() not works as pass by reference because of re-slicing, Works same for all data types slice.
 
 	mapValue[3] = 33
 	byteSlice[2] = 'd'
@@ -1236,7 +1373,7 @@ func (o firstStruct) receiver() {
 	o.slicevalue[0] = "z"
 	o.mapvalue["d"] = "dd"
 
-	//We know, slice append function will not work as call by reference check notes and GolangsinglefileRecollect.go
+	//We know, slice append function will not work as same as call by reference, so this below value will not reflect
 	o.slicevalue = append(o.slicevalue, "p")
 }
 
@@ -1260,13 +1397,13 @@ type SampleStruct struct {
 
 func anonymousInlineFunction() {
 	//This functions also called as function literals.
-	//inline function, Don't need to pass the local variables, they have the scope automatically
+	//inline function, Don't need to pass the local variables, they have the outer function scope automatically
 	var data int
 	data = 3
 	func() {
 		fmt.Println("have the scope for the local variable", data)
 		data++
-		ScopeOnlyToThisInlineFunction := 10 //this variable don't have access/scope to outside this inline function func()
+		ScopeOnlyToThisInlineFunction := 10 //this variable don't have access/scope to outside from this inline function func()
 		ScopeOnlyToThisInlineFunction++
 	}()
 	fmt.Println("latest value", data)
@@ -1341,7 +1478,7 @@ func SliceMakeFunction() {
 	//Here Appending values will place it as 6th value EX: [0,0,0,0,0,4]
 
 	//Slice size/length and capacity:
-	//Current capacity is doubled, once the slice size is exceeded the capacity.
+	//Current capacity is doubled, once the current slice length is exceeded the capacity.
 	//Capacity can be equal or greater than size/length of slice
 
 	sl := make([]int, 20, 100)
@@ -1354,7 +1491,7 @@ func SliceMakeFunction() {
 	sliceCap := make([]int, 5, 10)
 	sliceCap[0] = 11
 	p(sliceCap, len(sliceCap), cap(sliceCap))
-	sliceCap = append(sliceCap, 1, 2, 3, 4, 5, 6) //Once the given length of slice is exceeded,The overall capacity will be doubled like Internally The given capacity of the new underlying array will be created.
+	sliceCap = append(sliceCap, 1, 2, 3, 4, 5, 6) //Once the given length of slice is exceeded,The overall capacity will be doubled because Internally The given capacity of the new underlying array will be created.(-----this is called re-slicing)
 	p(sliceCap, len(sliceCap), cap(sliceCap))
 
 	//another example
@@ -1367,7 +1504,7 @@ func SliceMakeFunction() {
 	f = append(f, 40)
 	fmt.Println(f, len(f), cap(f)) //0 0 10 20 30 40] 6 10
 
-	//normal empty slice declaration -- If capacity not mentioned, capacity is same as size.
+	//normal empty slice declaration -- If capacity not mentioned, capacity is same as slice length, Once the given length of slice is exceeded,The overall capacity will be doubled.
 	slice := []int{}
 	for i := 0; i < 20; i++ {
 		fmt.Println(len(slice), cap(slice))
@@ -1398,7 +1535,7 @@ func SliceMakeFunction() {
 	*/
 	fmt.Println("last size and capacity", len(slice), cap(slice))
 
-	//normal non-empty slice declaration
+	//normal non-empty slice declaration with values
 	gh1 := []int{1, 2, 3, 4, 5}
 	p(len(gh1), cap(gh1)) //5,5
 
@@ -1409,7 +1546,7 @@ func SliceMakeFunction() {
 	p(len(gh1), cap(gh1)) //9,10  -- Here still capacity is 10, Because we appeneded just two more values
 
 	/*
-		Using the capacity in slice can give better performance - If we have the idea of the length of slice definetely or approximetely, You can use capacity accordingly.
+		Using the proper capacity in slice can give better performance - If we have the idea of the length of slice definetely or approximetely, You can use capacity accordingly.
 		EX: If you are dealing with slice with large expected length, You can set capacity at intialization itself high.
 		https://stackoverflow.com/questions/45423667/what-is-the-point-in-setting-a-slices-capacity
 	*/
@@ -1475,7 +1612,7 @@ func forLoopExamples() {
 	}
 
 	// for {
-	// 	p("infinite while loop")
+	// 	p("infinite while loop alike")
 	// }
 
 	j := 0
@@ -1647,9 +1784,6 @@ func GenericFunction[genericType int | string | sample](s []genericType) {
 
 	// 	We can make a function generic to different defined data types.
 	// Empty Interface type simply takes all data types and have to type assert everytime EX: i.(int), But generics have more control on the input parameter values and less chances of unexpected data types with empty Interface and don't have to do type asserting.
-
-	//Can't use switch statements as well
-	//So use the logic that is common for all specified arguments data types, EX: s = append(s,10) - This is not allowed, This supports only int type slice.
 
 }
 

@@ -1,0 +1,1217 @@
+[
+    {
+        "uuid": "b7a98896-fa4d-4659-b99a-bd9046d69af4",
+        "title": "HSBC credit card reward points: Should you transfer to Marriott Bonvoy for the 40% bonus?",
+        "description": "HSBC is offering a 40% bonus for the transfer of credit card reward points to the Marriott Bonvoy program. The offer applies to 5 HSBC credit cards, is valid for a month, and the bonus Marriott Bonvoy points are capped at 2,00,000 per customer.",
+        "keywords": "Marriott Bonvoy, hotel loyalty program, Marriott International, earn Marriott Bonvoy points, transfer credit card reward points, credit card reward points, HSBC credit card points, Marriott Bonvoy program, personal finance, HSBC credit cards",
+        "snippet": "Banks occasionally offer bonus points for transferring credit card reward points to a partner program. The partner program can be an airline frequent flyer prog...",
+        "url": "https:\/\/www.livemint.com\/money\/personal-finance\/hsbc-credit-card-reward-points-should-you-transfer-to-marriott-bonvoy-for-the-40-bonus-11764661113481.html",
+        "image_url": "https:\/\/www.livemint.com\/lm-img\/img\/2025\/12\/02\/1600x900\/logo\/HSBC-CYBER-QUANTUM-0_1701842977355_1764661255006.JPG",
+        "language": "en",
+        "published_at": "2025-12-02T07:49:36.000000Z",
+        "source": "livemint.com",
+        "relevance_score": null,
+        "entities": [
+            {
+                "symbol": "AXISBANK-BL.NS",
+                "name": "AXIS BANK",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "N\/A",
+                "match_score": 16.987669,
+                "sentiment_score": 0.926,
+                "highlights": [
+                    {
+                        "highlight": "Apart from HSBC India, some other banks [+288 characters]",
+                        "sentiment": 0.926,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "HDB.BA",
+                "name": "HDFC BANK",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "ar",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 15.881493,
+                "sentiment_score": 0.926,
+                "highlights": [
+                    {
+                        "highlight": "Apart from HSBC India, some other banks [+288 characters]",
+                        "sentiment": 0.926,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            }
+        ],
+        "similar": []
+    },
+    {
+        "uuid": "67968e2a-2d66-4d00-b582-e6c0853f4704",
+        "title": "Mid-day Top gainers & losers on NSE, BSE today 2nd Dec: Sensex falls over 440 pts, Nifty at 26,000 level, media & financials lead market fall",
+        "description": "Sensex and Nifty slip amid weak foreign inflows, rupee pressure and global uncertainty. Asian Paints, Dr Reddy’s, NTPC, Jio Financial and Maruti led gainers of Nifty 50, while IndiGo, BEL, HDFC Life, ICICI Bank and HDFC Bank declined the most.",
+        "keywords": "",
+        "snippet": "Equity benchmarks dragged on Tuesday as investors locked in gains following the market’s recent record run in the previous trading session, with media and fin...",
+        "url": "https:\/\/www.thehindubusinessline.com\/markets\/mid-day-top-gainers-amp-losers-on-nse-bse-today-2nd-dec-sensex-falls-over-440-pts-nifty-at-26000-level-hdfc-bank-icici-bank-fall-asian-paints-jio-maruti-gain\/article70348436.ece",
+        "image_url": "https:\/\/bl-i.thgim.com\/public\/incoming\/55ippe\/article70348451.ece\/alternates\/LANDSCAPE_1200\/PO02_Market_crash.jpg",
+        "language": "en",
+        "published_at": "2025-12-02T07:25:56.000000Z",
+        "source": "thehindubusinessline.com",
+        "relevance_score": null,
+        "entities": [
+            {
+                "symbol": "ASIANPAINT.NS",
+                "name": "Asian Paints Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Basic Materials",
+                "match_score": 34.564148,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "INDIGO.NS",
+                "name": "InterGlobe Aviation Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Industrials",
+                "match_score": 38.429714,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "ASHOKLEY.NS",
+                "name": "Ashok Leyland Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Consumer Cyclical",
+                "match_score": 39.065296,
+                "sentiment_score": 0.3818,
+                "highlights": [
+                    {
+                        "highlight": "Also read\n\nMidcap and smallcap movers\n\nU[+325 characters]",
+                        "sentiment": 0.3818,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "ICICIBANK.NS",
+                "name": "ICICI Bank Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 32.613255,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "HDFCBANK.NS",
+                "name": "HDFC Bank Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 33.919945,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "BANKBARODA.NS",
+                "name": "Bank of Baroda",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 49.88798,
+                "sentiment_score": 0.0772,
+                "highlights": [
+                    {
+                        "highlight": "AU Small Finance, Canara Bank, <em>Bank<[+323 characters]",
+                        "sentiment": 0.0772,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "BEL.NS",
+                "name": "Bharat Electronics Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Industrials",
+                "match_score": 33.863304,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "CANBK.NS",
+                "name": "Canara Bank",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 51.237263,
+                "sentiment_score": 0.0772,
+                "highlights": [
+                    {
+                        "highlight": "AU Small Finance, <em>Canara<\/em> <em>Ba[+314 characters]",
+                        "sentiment": 0.0772,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "BSE.NS",
+                "name": "BSE Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 59.527706,
+                "sentiment_score": 0.0258,
+                "highlights": [
+                    {
+                        "highlight": "Mid-day Top gainers & losers on <em>NSE<\/em>, <em>BSE<\/em> today 2nd Dec: Sensex falls over 440 pts, Nifty at 26,000 level, media & financials lead market fall",
+                        "sentiment": 0.0258,
+                        "highlighted_in": "title"
+                    }
+                ]
+            },
+            {
+                "symbol": "INDIANB.NS",
+                "name": "Indian Bank",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 38.04195,
+                "sentiment_score": 0.3818,
+                "highlights": [
+                    {
+                        "highlight": "Also read\n\nMidcap and smallcap movers\n\nU[+325 characters]",
+                        "sentiment": 0.3818,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "HEROMOTOCO.NS",
+                "name": "Hero MotoCorp Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Consumer Cyclical",
+                "match_score": 36.8629,
+                "sentiment_score": -0.5106,
+                "highlights": [
+                    {
+                        "highlight": "AU Small Finance, Canara Bank, Bank of B[+314 characters]",
+                        "sentiment": -0.5106,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "NTPC.NS",
+                "name": "NTPC Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Utilities",
+                "match_score": 29.48415,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+292 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "NATCOPHARM.NS",
+                "name": "NATCO Pharma Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Healthcare",
+                "match_score": 39.328075,
+                "sentiment_score": 0.6666,
+                "highlights": [
+                    {
+                        "highlight": "Smallcap stocks <em>Natco<\/em> <em>Pharm[+199 characters]",
+                        "sentiment": 0.6666,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "^NSEI",
+                "name": "Nifty 50",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "index",
+                "industry": "N\/A",
+                "match_score": 49.985977,
+                "sentiment_score": -0.015333,
+                "highlights": [
+                    {
+                        "highlight": "Sensex fell 447 points from the previous[+148 characters]",
+                        "sentiment": 0,
+                        "highlighted_in": "main_text"
+                    },
+                    {
+                        "highlight": "Also read\n\nAt 12.34 pm, Sensex traded 34[+240 characters]",
+                        "sentiment": -0.296,
+                        "highlighted_in": "main_text"
+                    },
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.25,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "WOCKPHARMA.NS",
+                "name": "Wockhardt Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Healthcare",
+                "match_score": 32.77657,
+                "sentiment_score": 0.6666,
+                "highlights": [
+                    {
+                        "highlight": "Smallcap stocks Natco Pharma, <em>Wockha[+190 characters]",
+                        "sentiment": 0.6666,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "GLAND.NS",
+                "name": "Gland Pharma Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Healthcare",
+                "match_score": 37.688076,
+                "sentiment_score": 0.6666,
+                "highlights": [
+                    {
+                        "highlight": "Smallcap stocks Natco Pharma, Wockhardt,[+199 characters]",
+                        "sentiment": 0.6666,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "HDB.BA",
+                "name": "HDFC BANK",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "ar",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 26.05748,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "INDIGO.BO",
+                "name": "InterGlobe Aviation Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Industrials",
+                "match_score": 38.249977,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "ASIANPAINT.BO",
+                "name": "Asian Paints Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Basic Materials",
+                "match_score": 34.39015,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "ASHOKLEY.BO",
+                "name": "Ashok Leyland Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Consumer Cyclical",
+                "match_score": 38.888817,
+                "sentiment_score": 0.3818,
+                "highlights": [
+                    {
+                        "highlight": "Also read\n\nMidcap and smallcap movers\n\nU[+325 characters]",
+                        "sentiment": 0.3818,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "HDFCBANK.BO",
+                "name": "HDFC Bank Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 33.745743,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "ICICIBANK.BO",
+                "name": "ICICI Bank Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 32.43896,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "BEL.BO",
+                "name": "Bharat Electronics Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Industrials",
+                "match_score": 33.689693,
+                "sentiment_score": 0.5719,
+                "highlights": [
+                    {
+                        "highlight": "PSU Bank and IT managed to trade with mo[+301 characters]",
+                        "sentiment": 0.5719,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "HEROMOTOCO.BO",
+                "name": "Hero MotoCorp Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Consumer Cyclical",
+                "match_score": 36.68589,
+                "sentiment_score": -0.5106,
+                "highlights": [
+                    {
+                        "highlight": "AU Small Finance, Canara Bank, Bank of B[+314 characters]",
+                        "sentiment": -0.5106,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "WOCKPHARMA.BO",
+                "name": "Wockhardt Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Healthcare",
+                "match_score": 32.595413,
+                "sentiment_score": 0.6666,
+                "highlights": [
+                    {
+                        "highlight": "Smallcap stocks Natco Pharma, <em>Wockha[+190 characters]",
+                        "sentiment": 0.6666,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            }
+        ],
+        "similar": []
+    },
+    {
+        "uuid": "8d3cdc9f-84e4-4007-87f8-5f0c3a3ba9ae",
+        "title": "NSE revises Nifty Bank Index: Adds Yes Bank and Union Bank in major revamp",
+        "description": "NSE revises Nifty Bank Index, adding Yes Bank and Union Bank, expanding to 14 constituents for better diversification and stability.",
+        "keywords": "NSE, Nifty Bank Index, Yes Bank, Union Bank",
+        "snippet": "The National Stock Exchange has finalised major revisions to the methodology of the Nifty Bank Index, marking one of the most significant structural changes to ...",
+        "url": "https:\/\/www.thehindubusinessline.com\/markets\/nse-revises-nifty-bank-index-adds-yes-bank-and-union-bank-in-major-revamp\/article70348323.ece",
+        "image_url": "https:\/\/bl-i.thgim.com\/public\/incoming\/a6c57y\/article70348346.ece\/alternates\/LANDSCAPE_1200\/PO13_BS_stock_market.jpg",
+        "language": "en",
+        "published_at": "2025-12-02T06:48:04.000000Z",
+        "source": "thehindubusinessline.com",
+        "relevance_score": null,
+        "entities": [
+            {
+                "symbol": "AUBANK.NS",
+                "name": "AU Small Finance Bank Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 42.431007,
+                "sentiment_score": 0.5267,
+                "highlights": [
+                    {
+                        "highlight": "Projections included in the research sho[+322 characters]",
+                        "sentiment": 0.5267,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "^NSEBANK",
+                "name": "Nifty Bank",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "index",
+                "industry": "N\/A",
+                "match_score": 103.138115,
+                "sentiment_score": 0.433667,
+                "highlights": [
+                    {
+                        "highlight": "The National Stock Exchange has finalise[+336 characters]",
+                        "sentiment": 0.5809,
+                        "highlighted_in": "main_text"
+                    },
+                    {
+                        "highlight": "According to the exchange statement, the[+223 characters]",
+                        "sentiment": 0.3182,
+                        "highlighted_in": "main_text"
+                    },
+                    {
+                        "highlight": "NSE revises <em>Nifty<\/em> <em>Bank<\/em> Index: Adds Yes Bank and Union Bank in major revamp",
+                        "sentiment": 0.4019,
+                        "highlighted_in": "title"
+                    }
+                ]
+            },
+            {
+                "symbol": "ICICIBANK.NS",
+                "name": "ICICI Bank Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 38.24977,
+                "sentiment_score": 0.5267,
+                "highlights": [
+                    {
+                        "highlight": "Projections included in the research sho[+304 characters]",
+                        "sentiment": 0.5267,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "HDFCBANK.NS",
+                "name": "HDFC Bank Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 37.937096,
+                "sentiment_score": 0.5267,
+                "highlights": [
+                    {
+                        "highlight": "Projections included in the research sho[+304 characters]",
+                        "sentiment": 0.5267,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "YESBANK.NS",
+                "name": "Yes Bank Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 68.724014,
+                "sentiment_score": 0.268833,
+                "highlights": [
+                    {
+                        "highlight": "The reshuffle brings two new entrants in[+197 characters]",
+                        "sentiment": 0.2023,
+                        "highlighted_in": "main_text"
+                    },
+                    {
+                        "highlight": "The newly added <em>Yes<\/em> <em>Bank<\/e[+302 characters]",
+                        "sentiment": 0.2023,
+                        "highlighted_in": "main_text"
+                    },
+                    {
+                        "highlight": "NSE revises Nifty Bank Index: Adds <em>Yes<\/em> <em>Bank<\/em> and Union Bank in major revamp",
+                        "sentiment": 0.4019,
+                        "highlighted_in": "title"
+                    }
+                ]
+            },
+            {
+                "symbol": "PNB.NS",
+                "name": "Punjab National Bank",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 55.191605,
+                "sentiment_score": 0.5267,
+                "highlights": [
+                    {
+                        "highlight": "Projections included in the research sho[+313 characters]",
+                        "sentiment": 0.5267,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "BANKBARODA.NS",
+                "name": "Bank of Baroda",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 54.018616,
+                "sentiment_score": 0.5267,
+                "highlights": [
+                    {
+                        "highlight": "Projections included in the research sho[+313 characters]",
+                        "sentiment": 0.5267,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "UNIONBANK.NS",
+                "name": "Union Bank of India",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 62.522865,
+                "sentiment_score": 0.5423,
+                "highlights": [
+                    {
+                        "highlight": "The reshuffle brings two new entrants in[+215 characters]",
+                        "sentiment": 0.5423,
+                        "highlighted_in": "main_text"
+                    },
+                    {
+                        "highlight": "The newly added Yes Bank and <em>Union<\/[+320 characters]",
+                        "sentiment": 0.5423,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "CANBK.NS",
+                "name": "Canara Bank",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 54.719036,
+                "sentiment_score": 0.5267,
+                "highlights": [
+                    {
+                        "highlight": "Projections included in the research sho[+304 characters]",
+                        "sentiment": 0.5267,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "BANKINDIA.NS",
+                "name": "Bank of India Limited",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 39.048912,
+                "sentiment_score": 0.5423,
+                "highlights": [
+                    {
+                        "highlight": "The reshuffle brings two new entrants in[+206 characters]",
+                        "sentiment": 0.5423,
+                        "highlighted_in": "main_text"
+                    },
+                    {
+                        "highlight": "The newly added Yes Bank and Union <em>B[+311 characters]",
+                        "sentiment": 0.5423,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "HDB.BA",
+                "name": "HDFC BANK",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "ar",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 22.36778,
+                "sentiment_score": 0.5267,
+                "highlights": [
+                    {
+                        "highlight": "Projections included in the research sho[+304 characters]",
+                        "sentiment": 0.5267,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            },
+            {
+                "symbol": "PNB.BO",
+                "name": "Punjab National Bank",
+                "exchange": null,
+                "exchange_long": null,
+                "country": "in",
+                "type": "equity",
+                "industry": "Financial Services",
+                "match_score": 28.939117,
+                "sentiment_score": 0.5267,
+                "highlights": [
+                    {
+                        "highlight": "Projections included in the research sho[+313 characters]",
+                        "sentiment": 0.5267,
+                        "highlighted_in": "main_text"
+                    }
+                ]
+            }
+        ],
+        "similar": []
+    }
+]
+}
+
+
+{
+"uuid": "8d3cdc9f-84e4-4007-87f8-5f0c3a3ba9ae",
+"title": "NSE revises Nifty Bank Index: Adds Yes Bank and Union Bank in major revamp",
+"description": "NSE revises Nifty Bank Index, adding Yes Bank and Union Bank, expanding to 14 constituents for better diversification and stability.",
+"keywords": "NSE, Nifty Bank Index, Yes Bank, Union Bank",
+"snippet": "The National Stock Exchange has finalised major revisions to the methodology of the Nifty Bank Index, marking one of the most significant structural changes to ...",
+"url": "https:\/\/www.thehindubusinessline.com\/markets\/nse-revises-nifty-bank-index-adds-yes-bank-and-union-bank-in-major-revamp\/article70348323.ece",
+"image_url": "https:\/\/bl-i.thgim.com\/public\/incoming\/a6c57y\/article70348346.ece\/alternates\/LANDSCAPE_1200\/PO13_BS_stock_market.jpg",
+"language": "en",
+"published_at": "2025-12-02T06:48:04.000000Z",
+"source": "thehindubusinessline.com",
+"relevance_score": null,
+"entities": [
+    {
+        "symbol": "AUBANK.NS",
+        "name": "AU Small Finance Bank Limited",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 42.431007,
+        "sentiment_score": 0.5267,
+        "highlights": [
+            {
+                "highlight": "Projections included in the research sho[+322 characters]",
+                "sentiment": 0.5267,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "^NSEBANK",
+        "name": "Nifty Bank",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "index",
+        "industry": "N\/A",
+        "match_score": 103.138115,
+        "sentiment_score": 0.433667,
+        "highlights": [
+            {
+                "highlight": "The National Stock Exchange has finalise[+336 characters]",
+                "sentiment": 0.5809,
+                "highlighted_in": "main_text"
+            },
+            {
+                "highlight": "According to the exchange statement, the[+223 characters]",
+                "sentiment": 0.3182,
+                "highlighted_in": "main_text"
+            },
+            {
+                "highlight": "NSE revises <em>Nifty<\/em> <em>Bank<\/em> Index: Adds Yes Bank and Union Bank in major revamp",
+                "sentiment": 0.4019,
+                "highlighted_in": "title"
+            }
+        ]
+    },
+    {
+        "symbol": "ICICIBANK.NS",
+        "name": "ICICI Bank Limited",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 38.24977,
+        "sentiment_score": 0.5267,
+        "highlights": [
+            {
+                "highlight": "Projections included in the research sho[+304 characters]",
+                "sentiment": 0.5267,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "HDFCBANK.NS",
+        "name": "HDFC Bank Limited",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 37.937096,
+        "sentiment_score": 0.5267,
+        "highlights": [
+            {
+                "highlight": "Projections included in the research sho[+304 characters]",
+                "sentiment": 0.5267,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "YESBANK.NS",
+        "name": "Yes Bank Limited",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 68.724014,
+        "sentiment_score": 0.268833,
+        "highlights": [
+            {
+                "highlight": "The reshuffle brings two new entrants in[+197 characters]",
+                "sentiment": 0.2023,
+                "highlighted_in": "main_text"
+            },
+            {
+                "highlight": "The newly added <em>Yes<\/em> <em>Bank<\/e[+302 characters]",
+                "sentiment": 0.2023,
+                "highlighted_in": "main_text"
+            },
+            {
+                "highlight": "NSE revises Nifty Bank Index: Adds <em>Yes<\/em> <em>Bank<\/em> and Union Bank in major revamp",
+                "sentiment": 0.4019,
+                "highlighted_in": "title"
+            }
+        ]
+    },
+    {
+        "symbol": "PNB.NS",
+        "name": "Punjab National Bank",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 55.191605,
+        "sentiment_score": 0.5267,
+        "highlights": [
+            {
+                "highlight": "Projections included in the research sho[+313 characters]",
+                "sentiment": 0.5267,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "BANKBARODA.NS",
+        "name": "Bank of Baroda",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 54.018616,
+        "sentiment_score": 0.5267,
+        "highlights": [
+            {
+                "highlight": "Projections included in the research sho[+313 characters]",
+                "sentiment": 0.5267,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "UNIONBANK.NS",
+        "name": "Union Bank of India",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 62.522865,
+        "sentiment_score": 0.5423,
+        "highlights": [
+            {
+                "highlight": "The reshuffle brings two new entrants in[+215 characters]",
+                "sentiment": 0.5423,
+                "highlighted_in": "main_text"
+            },
+            {
+                "highlight": "The newly added Yes Bank and <em>Union<\/[+320 characters]",
+                "sentiment": 0.5423,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "CANBK.NS",
+        "name": "Canara Bank",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 54.719036,
+        "sentiment_score": 0.5267,
+        "highlights": [
+            {
+                "highlight": "Projections included in the research sho[+304 characters]",
+                "sentiment": 0.5267,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "BANKINDIA.NS",
+        "name": "Bank of India Limited",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 39.048912,
+        "sentiment_score": 0.5423,
+        "highlights": [
+            {
+                "highlight": "The reshuffle brings two new entrants in[+206 characters]",
+                "sentiment": 0.5423,
+                "highlighted_in": "main_text"
+            },
+            {
+                "highlight": "The newly added Yes Bank and Union <em>B[+311 characters]",
+                "sentiment": 0.5423,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "HDB.BA",
+        "name": "HDFC BANK",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "ar",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 22.36778,
+        "sentiment_score": 0.5267,
+        "highlights": [
+            {
+                "highlight": "Projections included in the research sho[+304 characters]",
+                "sentiment": 0.5267,
+                "highlighted_in": "main_text"
+            }
+        ]
+    },
+    {
+        "symbol": "PNB.BO",
+        "name": "Punjab National Bank",
+        "exchange": null,
+        "exchange_long": null,
+        "country": "in",
+        "type": "equity",
+        "industry": "Financial Services",
+        "match_score": 28.939117,
+        "sentiment_score": 0.5267,
+        "highlights": [
+            {
+                "highlight": "Projections included in the research sho[+313 characters]",
+                "sentiment": 0.5267,
+                "highlighted_in": "main_text"
+            }
+        ]
+    }
+],
+"similar": []
+}
+]
+}
+
+
+{
+"stat": "Ok",
+"request_time": "19:39:24 02-12-2025",
+"values": [
+{
+"token": "14788",
+"cname": "SUN PHARMA ADV.RES.CO.LTD",
+"tsym": "SPARC-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "161.02",
+"c": "134.19",
+"v": "2.61Cr",
+"value": "134.190000",
+"oi": "0",
+"pc": "19.99"
+},
+{
+"token": "11374",
+"cname": "TIPS FILMS LIMITED",
+"tsym": "TIPSFILMS-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.05",
+"lp": "438.50",
+"c": "365.45",
+"v": "41706",
+"value": "365.450000",
+"oi": "0",
+"pc": "19.99"
+},
+{
+"token": "2792",
+"cname": "EASY TRIP PLANNERS LTD",
+"tsym": "EASEMYTRIP-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "8.54",
+"c": "7.13",
+"v": "33.63Cr",
+"value": "7.130000",
+"oi": "0",
+"pc": "19.78"
+},
+{
+"token": "10188",
+"cname": "SHYAM CENTURY FERROUS LTD",
+"tsym": "SHYAMCENT-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "6.90",
+"c": "6.18",
+"v": "18.01Lk",
+"value": "6.180000",
+"oi": "0",
+"pc": "11.65"
+},
+{
+"token": "14848",
+"cname": "ALPA LABORATORIES LTD",
+"tsym": "ALPA-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "86.58",
+"c": "77.80",
+"v": "3.15Lk",
+"value": "77.800000",
+"oi": "0",
+"pc": "11.29"
+},
+{
+"token": "7211",
+"cname": "JET FREIGHT LOGISTICS LTD",
+"tsym": "JETFREIGHT-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "19.67",
+"c": "17.78",
+"v": "10.14Lk",
+"value": "17.780000",
+"oi": "0",
+"pc": "10.63"
+},
+{
+"token": "1375",
+"cname": "HINDUSTAN CONSTRUCTION CO",
+"tsym": "HCC-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "26.56",
+"c": "24.02",
+"v": "24.38Cr",
+"value": "24.020000",
+"oi": "0",
+"pc": "10.57"
+},
+{
+"token": "759728",
+"cname": "EMMVEE PHOTOVOLTAIC PWR L",
+"tsym": "EMMVEE-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "239.34",
+"c": "218.88",
+"v": "3.46Cr",
+"value": "218.880000",
+"oi": "0",
+"pc": "9.35"
+},
+{
+"token": "758173",
+"cname": "PROSTARM INFO SYSTEMS LTD",
+"tsym": "PROSTARM-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "193.96",
+"c": "177.94",
+"v": "5.29Cr",
+"value": "177.940000",
+"oi": "0",
+"pc": "9.00"
+},
+{
+"token": "4037",
+"cname": "AUSOM ENTERPRISE LIMITED",
+"tsym": "AUSOMENT-EQ",
+"exch": "NSE",
+"pp": "2",
+"ls": "1",
+"ti": "0.01",
+"lp": "119.99",
+"c": "110.12",
+"v": "71845",
+"value": "110.120000",
+"oi": "0",
+"pc": "8.96"
+}
+]
+}

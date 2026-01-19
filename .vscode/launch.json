@@ -1,48 +1,20 @@
 {
     "configurations": [
         {
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "program": "d:\\Golang_practice_personal\\practice\\Practicing\\golangSingleFileRecollect.go",
-            "args": [],
-            "name": "debug golangSingleFileRecollect.go",
+            "name": "Launch file",
             "type": "go",
-            "mode": "auto"
-        },
-        {
             "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "program": "d:\\Golang_practice_personal\\practice\\Practicing\\check.go",
-            "args": [],
-            "name": "debug check.go",
-            "type": "go",
-            "mode": "auto"
-        },
-        {
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "program": "d:\\Golang_practice_personal\\practice\\goConcurrency\\GoConcurrency.go",
-            "args": [],
-            "name": "debug GoConcurrency.go",
-            "type": "go",
-            "mode": "auto"
-        },
-        {
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "program": "d:\\Golang_practice_personal\\Interview\\interview4.go",
-            "args": [],
-            "name": "debug interview4.go",
-            "type": "go",
-            "mode": "auto"
-        },
-        {
-            "type": "go",
-            "name": "debug interview1.go",
-            "request": "launch",
-            "mode": "auto",
-            "args": [],
-            "program": "d:\\Golang_practice_personal\\Interview\\interview1.go"
+            "mode": "debug",
+            "program": "${file}"
         }
+        // {
+        //     "request": "launch",
+        //     "cwd": "${workspaceFolder}",
+        //     "program": "d:\\Golang_practice_personal\\practice\\Practicing\\golangSingleFileRecollect.go",
+        //     "args": [],
+        //     "name": "debug golangSingleFileRecollect.go",
+        //     "type": "go",
+        //     "mode": "auto"
+        // }
     ]
 }

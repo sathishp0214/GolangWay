@@ -26,7 +26,7 @@ func (o firstStruct) ValueReceiver() {
 	o.slicevalue[0] = "z"
 	o.mapvalue["d"] = "dd"
 
-	//We know, slice append function will not work as call by reference check notes and GolangsinglefileRecollect.go
+	//We know, slice append function will not work as call by reference check notes on goBase.go
 	o.slicevalue = append(o.slicevalue, "p")
 }
 
@@ -368,3 +368,40 @@ type CC struct {
 	AA
 	BB
 }
+
+/*
+
+Encapsulation - Data(struct fields) is hidden by unexported struct fields to other packages. So these  unexported struct fields data can be created, updated,deleted, readed only under this package with that actual struct's methods EX: below NewAccount,Deposit etc. (or) famous "getter and setter methods examples"
+
+Data is hidden so We can also control access by these below function validations. EX:NewAccount
+
+why Encapsulation is needed - when particular struct fields needs control or validations that can be acheived by unexported struct fields with validation functions EX:NewAccount in the struct same package.
+
+
+type Account struct {
+    accountNo int   //unexported field
+    balance   float64 //unexported field
+}
+
+func NewAccount(no int, initial float64) *Account {
+    if initial < 0 {
+        panic("invalid initial balance")
+    }
+    return &Account{accountNo: no, balance: initial}   //Creation the unexported fields data only after above validations or assume security layers in the same actual struct package
+}
+
+func (a *Account) Deposit(amount float64) error {
+    if amount <= 0 {
+        return fmt.Errorf("invalid deposit amount")
+    }
+	//update the unexported fields data only after above validations or assume security layers in the same actual struct package
+    a.balance += amount
+    return nil
+}
+
+func (a *Account) Balance() float64 {
+	//read the unexported fields data only after assume validations or assume security layers in the same actual struct package
+    return a.balance
+}
+
+*/
