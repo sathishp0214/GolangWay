@@ -21,8 +21,8 @@ import (
 )
 
 var (
-	token         = "67a4b8be386c246b6507b59f6eaddca219cb8151f24112877b1ca4df593fc333"
-	optionStock   = "NIFTY20JAN26C25900" //"NIFTY18NOV25P25800"
+	token         = "122c1435a9cfbdc38f2fc4ab4eedf2e36239d9df47025d3d523b594dbbb9e911"
+	optionStock   = "NIFTY20JAN26P25550" //"NIFTY18NOV25P25800"
 	id            = "FZ23969"
 	niftyOneLot   = "65"
 	niftyTwoLot   = "130"
@@ -31,27 +31,32 @@ var (
 	rsiLimitlower = 7.0 //for 5 minute timeframe RSI(3)
 	rsiLimitlow   = 25.0
 
-	NiftyExchange        = "NSE"
-	OptionsExchange      = "NFO"
-	Nifty50              = "Nifty 50"
-	NiftyYesterdayCandle Candle
-	PreviousDayHigh      float64 //previous day nifty50 high
-	PreviousDayLow       float64
-	location             *time.Location
-	fileName             = "tradinglogs.txt"
-	f                    *os.File
-	LastRun              = time.Now()
-	PreviousDay          int
-	year                 int
-	day                  int
-	month                time.Month
-	botToken             = "8302802854:AAF_nCOnPD2KuUEsh8QP582aPZAnUP5Ye4E"
-	chatID               = "5987150863"
-	RunningInterval      int
-	OptionsStockOI       = 300000.0
-	OptionsStockVolume   = 10000.0
-	optionsStockMonth    = "27JAN26" //should be last tuesday of month
-	lotSize              map[string]string
+	NiftyExchange                    = "NSE"
+	OptionsExchange                  = "NFO"
+	Nifty50                          = "Nifty 50"
+	NiftyYesterdayCandle             Candle
+	PreviousDayHigh                  float64 //previous day nifty50 high
+	PreviousDayLow                   float64
+	location                         *time.Location
+	fileName                         = "tradinglogs.txt"
+	f                                *os.File
+	LastRun                          = time.Now()
+	PreviousDay                      int
+	year                             int
+	day                              int
+	month                            time.Month
+	botToken                         = "8302802854:AAF_nCOnPD2KuUEsh8QP582aPZAnUP5Ye4E"
+	chatID                           = "5987150863"
+	RunningInterval                  int
+	OptionsStockOI                   = 100000.0
+	OptionsStockVolume               = 5000.0
+	OptionsStockStopLossPercentage   = 4.0
+	OptionsStockTargetPercentage     = 30.0
+	OptionsStockLimitPricePercentage = 4.0
+	optionsStockMonth                = "27JAN26" //should be last tuesday of month
+	lotSize                          map[string]string
+	NiftyTradingOpenFlag             = false
+	diff                             float64
 )
 
 func init() {
@@ -72,34 +77,34 @@ func init() {
 		return
 	}
 
-	// //Getting nifty 50 (or) any stock previous day's close, high, low
-	// //getTimestamp(4, 15) - One day before previous day - 4th day of a month
-	// //getTimestamp(5, 15) - previous day - 5th day of a month
-	// tmp1 := GetEODData(getTimestamp(PreviousDay-1, 15), getTimestamp(PreviousDay, 15), Nifty50)
-	// // fmt.Printf("EOD chart data--------%+v\n", tmp1)
-	// NiftyYesterdayCandle = GetCandleDataInFloat64([]Candle1{tmp1})
-	// // fmt.Println("NiftyYesterdayCandle--------", NiftyYesterdayCandle)
-	// PreviousDayHigh = NiftyYesterdayCandle.Inth[0]
-	// PreviousDayLow = NiftyYesterdayCandle.Intl[0]
+	//Getting nifty 50 (or) any stock previous day's close, high, low
+	//getTimestamp(4, 15) - One day before previous day - 4th day of a month
+	//getTimestamp(5, 15) - previous day - 5th day of a month
+	tmp1 := GetEODData(GetTimestamp(PreviousDay-1, 15), GetTimestamp(PreviousDay, 15), Nifty50)
+	// fmt.Printf("EOD chart data--------%+v\n", tmp1)
+	NiftyYesterdayCandle = GetCandleDataInFloat64([]Candle1{tmp1})
+	// fmt.Println("NiftyYesterdayCandle--------", NiftyYesterdayCandle)
+	PreviousDayHigh = NiftyYesterdayCandle.Inth[0]
+	PreviousDayLow = NiftyYesterdayCandle.Intl[0]
 
-	// fmt.Println("Nifty 50 Previous day values --------", NiftyYesterdayCandle)
-	// f.WriteString(fmt.Sprintf("Nifty 50 Previous day values --------%+v\n", NiftyYesterdayCandle))
+	fmt.Println("Nifty 50 Previous day values --------", NiftyYesterdayCandle)
+	f.WriteString(fmt.Sprintf("Nifty 50 Previous day values --------%+v\n", NiftyYesterdayCandle))
 
 }
 
 func HandlerLogic() {
 
-	// 	var err error
-	// 	// Append to file
-	// 	f, err = os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	// 	if err != nil {
-	// 		fmt.Println("Error opening log file:", err)
-	// 		return
-	// 	}
-	// 	defer f.Close()
+	var err error
+	// Append to file
+	f, err = os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println("Error opening log file:", err)
+		return
+	}
+	defer f.Close()
 
-	// 	logLine := fmt.Sprintf("--------------------- %v --------------------------------------------------\n", time.Now())
-	// 	f.WriteString(logLine)
+	logLine := fmt.Sprintf("--------------------- %v --------------------------------------------------\n", time.Now())
+	f.WriteString(logLine)
 
 	// 	// t225 := time.Date(year, month, day, 14, 25, 0, 0, location)
 
@@ -141,25 +146,29 @@ func HandlerLogic() {
 	// Handle CTRL+C / SIGTERM
 	go HandleShutdown(cancel)
 
-	firstRunInterval := 5 * time.Minute //ensures 5 min candle starts at correct time, also works for 1 min candle also
-	APIFetchBuffer := 4 * time.Second   //ensure api fetch data for EX: 10.15am data for 10.15.04 seconds
-	firstRun := nextAlignedTime(firstRunInterval, APIFetchBuffer, location)
+	now := time.Now().In(location)
+	interval := GetInterval(now)
+
+	APIFetchBuffer := 4 * time.Second //ensure api fetch data for EX: 10.15am data for 10.15.04 seconds
+
+	//EX:5 min - ensures 5 min candle starts at correct time, also works for 1 min candle also
+	firstRun := nextAlignedTime(interval, APIFetchBuffer, location)
 
 	time.Sleep(time.Until(firstRun))
 
-	now := time.Now().In(location)
-	fmt.Println("firstrun starts -------", time.Until(firstRun), "-----------", now)
+	// fmt.Println("firstrun starts -------", time.Until(firstRun), "-----------", now)
 
-	go RunTask(ctx, 60*time.Second, SellOrders)
+	go RunTask(ctx, 1*time.Minute, NiftyCrossCheck)
 
-	//doing one time initial run
-	IntradayLogic()
+	//doing one time initial run then below runtask maintains the run interval correct
+	// IntradayLogic()
 
-	interval := GetInterval(now)
+	// go RunTask(ctx, interval, SellOrders)
 
 	go RunTask(ctx, interval, IntradayLogic)
 
-	go RunTask(ctx, interval, IntradayLogicVersion1)
+	//sets default 5 minutes as of now
+	go RunTask(ctx, 5*time.Minute, IntradayLogicVersion1)
 
 	// go RunTradingScheduler(ctx, SellOrders)
 	// go RunTradingScheduler(ctx, IntradayLogic)
@@ -192,9 +201,11 @@ func Dummy() {
 	// "RELIANCE27JAN26C1900"
 	// "WAAREEENER27JAN26C2500"
 	// tmp, _ := GetCandleData(GetTimestamp(), "WAAREEENER27JAN26C2500", 1, OptionsExchange)
-	tmp, _ := GetCandleData(GetTimestamp(), "NIFTY20JAN26C25900", 1, OptionsExchange)
-	candleData := GetCandleDataInFloat64(tmp)
-	fmt.Println(candleData)
+	// tmp, _ := GetCandleData(GetTimestamp(), "NIFTY20JAN26C25900", 1, OptionsExchange)
+	// candleData := GetCandleDataInFloat64(tmp)
+	// fmt.Println(candleData)
+
+	// PlaceOrder(optionStock, niftyOneLot, 43.55, 3.55, 43.116666666666, 43.116666666666/2)
 
 }
 
@@ -399,7 +410,9 @@ func SellOrders() {
 	now := time.Now().In(location)
 	fmt.Println("In sell order function----------", now)
 
-	body := getOrderBook()
+	body := GetOrderBook()
+
+	// fmt.Println("In sell order function----------", string(body))
 
 	//no orders found
 	if strings.Contains(string(body), "no data") {
@@ -436,11 +449,18 @@ func SellOrders() {
 		asma5 := SMA(intcValues, 5)
 		asma9 := SMA(intcValues, 9)
 
-		fmt.Println("sell sma details", asma5, asma9, asma5 < asma9, "------------ order details ---", len(intcValues), intcValues, order)
+		fmt.Println("sell order details", asma5, asma9, asma5 < asma9, "------------ order details ---", len(intcValues), intcValues, order)
 
-		if asma5 < asma9 {
+		if asma5 < asma9 || intcValues[0] < asma9 {
+			ModifyOrder(order.OrderNo, order.OrderSymbol, order.OrderQuantity, intcValues[0])
+			continue
+		}
+
+		//if buy open order has not executed in 10 minutes, Am exiting the order
+		if order.BuyOrSell == "B" && order.Status == "OPEN" && HasTimePassed(order.OrderTime, 10*time.Minute) {
 			ExitOrder(order.OrderNo)
-			msg := fmt.Sprintf("sell-- SMA 5 < SMA 9 - %v -- %v -- %v", order.OrderSymbol, now, intcValues[0])
+			// SendTelegramMessage("exit order executed, check it now" + order.OrderSymbol)
+			msg := fmt.Sprintf("exit Open order - %v -- %v -- %v", order.OrderSymbol, now, intcValues[0])
 			fmt.Println(msg)
 			f.WriteString(msg)
 
@@ -465,6 +485,8 @@ func ExitOrder(orderNo string) {
 	data := fmt.Sprintf(data1, orderNo)
 
 	payload := []byte(fmt.Sprintf("jData=%s&jKey=%s", data, token))
+
+	fmt.Println("exit order-------", string(payload))
 
 	req, err := http.NewRequest("POST", url1, bytes.NewBuffer(payload))
 	req.Header.Set("Content-Type", "application/json")
@@ -599,7 +621,7 @@ func GetOptionGreek() {
 
 }
 
-func getOrderBook() []byte {
+func GetOrderBook() []byte {
 
 	url1 := "https://piconnect.flattrade.in/PiConnectTP/OrderBook"
 
@@ -886,6 +908,48 @@ func GetCandleData(time930am int64, optionStock string, interval int, exchange s
 
 }
 
+func NiftyCrossCheck() {
+
+	//getting last 1 or 2 , 1 minutes candle data
+	Ntmp, _ := GetCandleData(GetCurrentTimestamp()-120, Nifty50, 1, NiftyExchange)
+	NiftyCandle := GetCandleDataInFloat64(Ntmp)
+
+	diff = NiftyCandle.Intc[0] - NiftyYesterdayCandle.Intc[0]
+
+	NiftyTradingOpenFlag = true
+
+	//if points are lesser than or greater than -50 then stopping the new trades
+
+	if diff > 0 {
+		if diff < 50 {
+			NiftyTradingOpenFlag = false
+		}
+	} else {
+		// means points less than -40, EX: -30 is greater than -40, -50 is smaller than -40
+		if diff > -50 {
+			NiftyTradingOpenFlag = false
+		}
+	}
+
+	//if points are reversed atleast 75 either sides, then switching the nifty same strike CE to PE or vice versa
+	n := len(optionStock)
+	if diff > 0 {
+		if diff > 75 {
+			if optionStock[n-6] == 'P' {
+				optionStock = ReversalOption(optionStock)
+			}
+		}
+	} else {
+		// means points less than -40, EX: -30 is greater than -40, -50 is smaller than -40
+		if diff < -75 {
+			if optionStock[n-6] == 'C' {
+				optionStock = ReversalOption(optionStock)
+			}
+		}
+	}
+
+}
+
 func ReversalORFallLogic() bool {
 
 	now := time.Now()
@@ -963,6 +1027,11 @@ func ReversalORFallLogic() bool {
 
 func IntradayLogic() {
 
+	if !NiftyTradingOpenFlag {
+		fmt.Println("Nifty points are low for the day----------------------", diff, "----", optionStock)
+		return
+	}
+
 	t225 := time.Date(year, month, day, 14, 25, 0, 0, location)
 	if time.Now().In(location).After(t225) {
 		fmt.Println("Thats it, No new buy orders not allowed for the day----------------------")
@@ -971,7 +1040,7 @@ func IntradayLogic() {
 
 	now := time.Now().In(location)
 
-	fmt.Println("intraday function executed--------", now)
+	fmt.Println("intraday function executed--------", now, "-------", diff, "----", optionStock)
 
 	var intcValues []float64
 
@@ -994,9 +1063,9 @@ func IntradayLogic() {
 
 		fmt.Println(asma5, asma9, asma5 > asma9, "------------", len(intcValues), intcValues)
 
-		if asma5 > asma9 && diff > smaCrossoverDifference && intcValues[0] > candleData.VWAP[0] {
-			var target int64
-			target = 108
+		if asma5 > asma9 && diff > smaCrossoverDifference && intcValues[0] > candleData.VWAP[0] && intcValues[0] > asma5 {
+
+			target := 108.0
 			//placing limit price as asma5 because this is natural pullback on trending days
 			PlaceOrder(optionStock, niftyOneLot, asma5, 8, target, GetTrailingStopLoss(target))
 			msg := fmt.Sprintf("before 10.15am -- SMA 5 > SMA 9 crossover happened - %v -- %v -- %v", optionStock, now, intcValues[0])
@@ -1030,12 +1099,11 @@ func IntradayLogic() {
 	fmt.Println("before SMA --------", bsma5, bsma9, bsma5 < bsma9, "------------", len(intcValues[1:]), now)
 	fmt.Println("latest SMA --------", asma5, asma9, asma5 > asma9, "------------", len(intcValues), now)
 
-	if bsma5 < bsma9 && asma5 > asma9 && intcValues[0] > candleData.VWAP[0] {
+	if bsma5 < bsma9 && asma5 > asma9 && intcValues[0] > asma9 {
 
 		// if asma5 > asma9 {
 
-		var target int64
-		target = 40
+		target := 40.0
 
 		PlaceOrder(optionStock, niftyOneLot, intcValues[0]-2.0, 8, target, GetTrailingStopLoss(target))
 		msg := fmt.Sprintf("SMA 5 > SMA 9 crossover happened - %v -- %v -- %v", optionStock, now, intcValues[0])
@@ -1065,6 +1133,12 @@ func IntradayLogicVersion1() {
 	now := time.Now().In(location)
 
 	fmt.Println("intraday function Version1 executed--------", now)
+
+	t1015 := time.Date(year, month, day, 10, 15, 0, 0, location)
+	if now.Before(t1015) {
+		fmt.Println("intraday function Version1 too early to execute-------", now)
+		return
+	}
 
 	// t225 := time.Date(year, month, day, 14, 25, 0, 0, location)
 	// if time.Now().In(location).After(t225) {
@@ -1135,11 +1209,11 @@ func IntradayLogicVersion1() {
 		}
 
 		//if price and OI is increasinbg for last n candles, n - 2, can set to 3 as well
-		candleNumbers := 2
-		if !CheckOptionsPriceWithOI(intcValues, candleData.OpenInterest, candleNumbers) {
-			fmt.Println("price or OI is not increasing ------------", optionStock, intcValues[:candleNumbers], candleData.OpenInterest[:candleNumbers])
-			continue
-		}
+		// candleNumbers := 2
+		// if !CheckOptionsPriceWithOI(intcValues, candleData.OpenInterest, candleNumbers) {
+		// 	fmt.Println("price or OI is not increasing ------------", optionStock, intcValues[:candleNumbers], candleData.OpenInterest[:candleNumbers])
+		// 	continue
+		// }
 
 		//checking SMA crossover logic after 10.15am
 
@@ -1151,19 +1225,29 @@ func IntradayLogicVersion1() {
 		fmt.Println("before SMA --------", bsma5, bsma9, bsma5 < bsma9, "------------", optionStock, len(intcValues[1:]), now)
 		fmt.Println("latest SMA --------", asma5, asma9, asma5 > asma9, "------------", optionStock, len(intcValues), now)
 
-		if bsma5 < bsma9 && asma5 > asma9 && intcValues[0] > candleData.VWAP[0] {
+		if bsma5 < bsma9 && asma5 > asma9 && intcValues[0] > asma9 && intcValues[0] > candleData.VWAP[0] && candleData.Volume[0] > SMA(candleData.Volume, 9) {
 
 			var target, limitPrice, TrailingSL, stoploss float64
 
-			limitPrice = Truncate(intcValues[0] - ((2.0 / 100.0) * intcValues[0])) //limitprice 2% minus last candle close
-			stoploss = Truncate((5.0 / 100.0) * intcValues[0])                     //stop loss 5% of last candle close
-			target = Truncate((50.0 / 100.0) * intcValues[0])                      //target 50% of last candle close
+			limitPrice = RoundTo005(Truncate(intcValues[0] - ((OptionsStockLimitPricePercentage / 100.0) * intcValues[0]))) //limitprice 2% minus last candle close
+			stoploss = RoundTo005(Truncate((OptionsStockStopLossPercentage / 100.0) * intcValues[0]))                       //stop loss 5% of last candle close
+			target = RoundTo005(Truncate((OptionsStockTargetPercentage / 100.0) * intcValues[0]))                           //target 50% of last candle close
 
-			TrailingSL = Truncate(target / 2)
+			TrailingSL = RoundTo005(Truncate(target / 2))
 
-			// PlaceOrder(optionStock, lotSize[optionSymbol], intcValues[0]-2.0, 8, target, GetTrailingStopLoss(target))
-			fmt.Println("-----------------------------", optionStock, lotSize[optionSymbol], limitPrice, stoploss, target, TrailingSL)
-			msg := fmt.Sprintf("SMA 5 > SMA 9 crossover happened - %v -- %v -- %v", optionStock, now, intcValues[0])
+			if limitPrice < 0.15 {
+				fmt.Println("very less entry limit price---------", optionStock, limitPrice)
+				continue
+			}
+
+			//flattrade require minimum value 1
+			if TrailingSL < 1 {
+				TrailingSL = 1
+			}
+
+			// PlaceOrder(optionStock, lotSize[optionSymbol], limitPrice, stoploss, target, TrailingSL)
+			fmt.Println("-----------------------------", now, optionStock, lotSize[optionSymbol], limitPrice, stoploss, target, TrailingSL)
+			msg := fmt.Sprintf("Stock OPtions SMA 5 > SMA 9 crossover happened - %v -- %v -- %v", optionStock, now, intcValues[0])
 			fmt.Println(msg)
 			f.WriteString(msg)
 			// SendTelegramMessage(msg)
@@ -1183,7 +1267,7 @@ func PercentageOfValue() {
 
 func RSILogicTrade() {
 	var intcValues []float64
-	var target int64
+	// var target int64
 
 	now := time.Now().In(location)
 
@@ -1207,8 +1291,8 @@ func RSILogicTrade() {
 		f.WriteString(fmt.Sprintf("RSI1 value - %v   - %v\n", rsi1, now))
 
 		if rsi1 <= 15.0 {
-			target = 108
-			PlaceOrder(optionStock, niftyOneLot, intcValues[len(intcValues)-1]-4.0, 8, target, int64(GetTrailingStopLoss(target)))
+			// target = 108
+			// PlaceOrder(optionStock, niftyOneLot, intcValues[len(intcValues)-1]-4.0, 8, target, int64(GetTrailingStopLoss(target)))
 
 			fmt.Println("---RSI000 buy order executed--------so sleeping now------------------------------", rsi1, intcValues[len(intcValues)-1], now)
 
@@ -1274,14 +1358,14 @@ func RSILogicTrade() {
 		//if the difference price is less the Ex: 20, more convinced entry for not buying at high price range depsite less RSI
 		if maxdiff > GetMaxDifference(maxValue, true) {
 
-			target = 12
+			// target = 12
 
 			//for 1 min timeframe, placing last candles close - 2 as limit price
 			//for 5 min timeframe, placing last candles close - 10 as limit price
 
 			// PlaceOrder(optionStock, niftyOneLot, intcValues[len(intcValues)-1]-7.0, 12, 60, 12)
 
-			PlaceOrder(optionStock, niftyOneLot, intcValues[len(intcValues)-1]-8.0, 10, target, (GetTrailingStopLoss(target)))
+			// PlaceOrder(optionStock, niftyOneLot, intcValues[len(intcValues)-1]-8.0, 10, target, (GetTrailingStopLoss(target)))
 
 			fmt.Println("---RSI 111 buy order executed--------so sleeping now------------------------------", rsi, intcValues[len(intcValues)-1], maxValue, now)
 
@@ -1315,14 +1399,14 @@ func RSILogicTrade() {
 		//if the difference price is less the Ex: 20, more convinced entry for not buying at high price range depsite less RSI
 		if maxdiff > GetMaxDifference(maxValue, false) {
 
-			target = 25
+			// target = 25
 
 			//for 1 min timeframe, placing last candles close - 2 as limit price
 			//for 5 min timeframe, placing last candles close - 10 as limit price
 
 			// PlaceOrder(optionStock, niftyTwoLot, intcValues[len(intcValues)-1]-2.0, 7, 60, 7)
 
-			PlaceOrder(optionStock, niftyOneLot, intcValues[len(intcValues)-1]-2.0, 8, target, GetTrailingStopLoss(target))
+			// PlaceOrder(optionStock, niftyOneLot, intcValues[len(intcValues)-1]-2.0, 8, target, GetTrailingStopLoss(target))
 
 			fmt.Println("---RSI 222 buy order executed--------so sleeping now------------------------------", rsi, intcValues[len(intcValues)-1], maxValue, now)
 
@@ -1396,7 +1480,7 @@ func GetCandleDataInFloat64(candles []Candle1) Candle {
 
 }
 
-func PlaceOrder(optionStock string, lot string, buyPrice float64, stopLoss int64, target int64, trailingStopLoss int64) {
+func PlaceOrder(optionStock string, lot string, buyPrice float64, stopLoss float64, target float64, trailingStopLoss float64) {
 	url1 := "https://piconnect.flattrade.in/PiConnectTP/PlaceOrder"
 
 	/*
@@ -1452,12 +1536,74 @@ func PlaceOrder(optionStock string, lot string, buyPrice float64, stopLoss int64
 
 }
 
+func ModifyOrder(orderNo string, symbol string, lotSize string, modifyPrice float64) {
+	url1 := "https://piconnect.flattrade.in/PiConnectTP/ModifyOrder"
+
+	/*
+			"exch": "NFO"  --> for options, in case of normal stocks buying: "exch": "NSE"
+			"tsym": "NIFTY18NOV25C26000"   ---> Example NIFTY 18NOV25 CE 26000
+			prd": "B" - bracket order
+			"prc": "80", -- entry limit order price
+		   bpprc - target price, EX: 20 price from entry price
+		   blprc - stop loss price
+		   trailprc - trailing stop loss
+		   "ret": "DAY"  - order validity day
+
+	*/
+
+	data := `{"uid": "FZ23969",
+	    "actid": "FZ23969",
+	    "exch": "NFO",
+	    "tsym": "%s",
+	    "qty": "%s",
+		"prc": "%v",
+		"prctyp": "LMT",
+        "ret": "DAY", 
+		"bpprc":"%v",
+		"norenordno": "%s"
+	}`
+
+	//"blprc":"%v",
+	// stoploss := modifyPrice + 0.05
+	target := modifyPrice - 0.05
+	// data1 := fmt.Sprintf(data, symbol, lotSize, modifyPrice, stoploss, target, orderNo)
+
+	data1 := fmt.Sprintf(data, symbol, lotSize, modifyPrice, target, orderNo)
+
+	payload := []byte(fmt.Sprintf("jData=%s&jKey=%s", data1, token))
+
+	fmt.Println("payload-----------:", string(payload))
+
+	req, err := http.NewRequest("POST", url1, bytes.NewBuffer(payload))
+	req.Header.Set("Content-Type", "application/json")
+
+	if err != nil {
+		panic(err)
+	}
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	// fmt.Println("API Request for order placed", resp)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("API Response for order modified-----------:", string(body))
+	f.WriteString(fmt.Sprintf("API Response for order modified-----------:%v\n", string(body)))
+
+}
+
 type OrderDetails struct {
-	OrderNo     string `json:"norenordno"`
-	Exchange    string `json:"exch"`
-	OrderSymbol string `json:"tsym"`
-	Status      string `json:"status"`
-	BuyOrSell   string `json:"trantype"`
+	OrderNo       string `json:"norenordno"`
+	Exchange      string `json:"exch"`
+	OrderSymbol   string `json:"tsym"`
+	Status        string `json:"status"`
+	BuyOrSell     string `json:"trantype"`
+	OrderTime     string `json:"exch_tm"`
+	OrderQuantity string `json:"qty"`
+	OrderToken    string `json:"token"`
 }
 
 type Candle1 struct {
@@ -1476,6 +1622,16 @@ type Candle struct {
 	VWAP         []float64 `json:"intvwap"`
 	Volume       []float64 `json:"intv"`
 	OpenInterest []float64 `json:"oi"`
+}
+
+func HasTimePassed(timeStr string, timeLimit time.Duration) bool {
+	layout := "02-01-2006 15:04:05"
+	inputTime, _ := time.ParseInLocation(layout, timeStr, location)
+	now := time.Now().In(location)
+
+	diff := now.Sub(inputTime)
+
+	return diff > timeLimit
 }
 
 // type Candle struct {
@@ -1584,7 +1740,7 @@ func GetMaxDifference(num float64, lower bool) float64 {
 	return val
 }
 
-func GetTrailingStopLoss(target int64) int64 {
+func GetTrailingStopLoss(target float64) float64 {
 	if target <= 20 {
 		return 0
 	} else if target > 20 && target <= 60 {
@@ -1602,7 +1758,8 @@ func SMA(closes []float64, period int) float64 {
 	for _, c := range closes[:period] {
 		sum += c
 	}
-	return sum / float64(period)
+	val := sum / float64(period)
+	return RoundTo005(val)
 }
 
 func SendTelegramMessage(message string) error {
@@ -1742,6 +1899,12 @@ func FilterFOStocks(body []byte) (map[string]string, map[string]string, error) {
 	}
 
 	return CEStocks, PEStocks, nil
+}
+
+func RoundTo005(val float64) float64 {
+
+	scaled := math.Round(val * 20) // because 1 / 0.05 = 20
+	return scaled / 20
 }
 
 type FoStock struct {
